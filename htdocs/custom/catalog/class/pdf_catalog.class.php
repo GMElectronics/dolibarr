@@ -872,137 +872,24 @@ class pdf_catalog
             	$maxwidth = 35;
             }
 
-            if (empty($conf->global->CATALOG_RENDERING_OPTION_2))
-            {
-	            $default_font_size = pdf_getPDFFontSize($outputlangs);	// Must be after pdf_getInstance
-	            $pdf->SetFont('','', $default_font_size);
+			$default_font_size = pdf_getPDFFontSize($outputlangs);	// Must be after pdf_getInstance
+			$pdf->SetFont('','', $default_font_size);
 
-            	$pdf->SetFillColor(212, 212, 212);  // Couleur de la cellule pour le nom du produit
-    	        $pdf->Cell($this->page_largeur - $this->marge_gauche - $this->marge_droite, 6, $nameproduit, 0, 2, 'L', 1); // Nom du produit
-            }
-            else
-            {
-            	$default_font_size = pdf_getPDFFontSize($outputlangs);	// Must be after pdf_getInstance
+			$pdf->SetFillColor(212, 212, 212);  // Couleur de la cellule pour le nom du produit
+			$pdf->Cell($this->page_largeur - $this->marge_gauche - $this->marge_droite, 6, $nameproduit, 0, 2, 'L', 1); // Nom du produit
 
-            	if ($i == 0) 	// Line of titles
-            	{
-            		$pdf->SetFont('','B', $default_font_size - 1);
-            		$pos_y = $y_axe + $interligne + 8;
-            		$pos_x = $x_axe;
-            		$pdf->writeHTMLCell(10, 5, $pos_x, $pos_y, '#', 0, 1);
-            		$pos_x = $x_axe + $maxwidth + 5;
-            		$pdf->writeHTMLCell(50, 5, $pos_x, $pos_y, $outputlangs->transnoentities('Ref'), 0, 1);
-            		$pos_x = $x_axe + $maxwidth + 55;
-            		$pdf->writeHTMLCell(50, 5, $pos_x, $pos_y, $outputlangs->transnoentities('Label'), 0, 1);
-            		$pos_x = $x_axe + $maxwidth + 55;
-            		$pdf->writeHTMLCell(50, 5, $pos_x, $pos_y, $outputlangs->transnoentities('Label'), 0, 1);
-            		$pos_x = $posproperties;
-            		$pdf->writeHTMLCell(50, 5, $pos_x, $pos_y, $outputlangs->transnoentities('Price'), 0, 1);
-            		//$pos_x = $posproperties + 20;
-            		//$pdf->writeHTMLCell(50, 5, $pos_x, $pos_y, $outputlangs->transnoentities('Stock'), 0, 1);
-            	}
-            	$pdf->SetFont('','', $default_font_size - 1);
-
-            	//$pdf->SetLineStyle(array('dash'=>'1,1','color'=>array(80,80,80)));
-            	//$pdf->SetDrawColor(190,190,200);
-            	$pdf->line($this->marge_gauche, $nexY+5, $this->page_largeur - $this->marge_droite, $nexY+5);
-            }
-
-            if (empty($conf->global->CATALOG_RENDERING_OPTION_2))
-            {
-	            // Description
-	            $pos_y = $y_axe + $interligne + 16;
-	            $pos_x = $x_axe + $maxwidth + 5;
-	            $pdf->writeHTMLCell(($posproperties - $pos_x - 2), 5, $pos_x, $pos_y, $description, 0, 1);
-            }
-            else
-            {
-            	// Nb
-            	$pos_y = $y_axe + $interligne + 16;
-            	$pos_x = $x_axe;
-            	$pdf->writeHTMLCell(10, 5, $pos_x, $pos_y, ($j+1), 0, 1);
-
-            	// Ref
-	            $pos_y = $y_axe + $interligne + 16;
-	            $pos_x = $x_axe + $maxwidth + 5;
-            	$pdf->writeHTMLCell(50, 5, $pos_x, $pos_y, $ref, 0, 1);
-
-            	// Label
-            	$pos_y = $y_axe + $interligne + 16;
-            	$pos_x = $x_axe + $maxwidth + 55;
-            	$pdf->writeHTMLCell(50, 5, $pos_x, $pos_y, $label, 0, 1);
-            }
+			// Description
+			$pos_y = $y_axe + $interligne + 16;
+			$pos_x = $x_axe + $maxwidth + 5;
+			$pdf->writeHTMLCell(($posproperties - $pos_x - 2), 5, $pos_x, $pos_y, $description, 0, 1);
 
             $deltay = 8;
-
-            // Property
-            $pdf->SetY($y_axe + $interligne + $deltay); // On se décalle de 16 mm sous le nom du produit
-            $pdf->SetX($posproperties); // On se décalle de 50 mm en x
-            $pdf->Cell(20, 20, $price, 0, 2, 'L', 0); // On imprime le prix
-            if ($price) $deltay+=5;
-
-            $pdf->SetY($y_axe + $interligne + $deltay);
-            $pdf->SetX($posproperties);
-            $pdf->Cell(20, 20, $weight, 0, 2, 'L', 0);
-            if ($weight) $deltay+=5;
-
-            $pdf->SetY($y_axe + $interligne + $deltay);
-            $pdf->SetX($posproperties);
-            $pdf->Cell(20, 20, $length, 0, 2, 'L', 0);
-            if ($length) $deltay+=5;
-
-			if ($conf->global->CAT_SHOW_WIDTH) {
-				$pdf->SetY($y_axe + $interligne + $deltay);
-				$pdf->SetX($posproperties);
-				$pdf->Cell(20, 20, $width1, 0, 2, 'L', 0);
-				if ($width1) $deltay += 5;
-			}
-
-			if ($conf->global->CAT_SHOW_HEIGHT) {
-				$pdf->SetY($y_axe + $interligne + $deltay);
-				$pdf->SetX($posproperties);
-				$pdf->Cell(20, 20, $height1, 0, 2, 'L', 0);
-				if ($height1) $deltay += 5;
-			}
-
-            $pdf->SetY($y_axe + $interligne + $deltay);
-            $pdf->SetX($posproperties);
-            $pdf->Cell(20, 20, $surface, 0, 2, 'L', 0);
-            if ($surface) $deltay+=5;
-
-            $pdf->SetY($y_axe + $interligne + $deltay);
-            $pdf->SetX($posproperties);
-            $pdf->Cell(20, 20, $volume, 0, 2, 'L', 0);
-            if ($volume) $deltay+=5;
-
-            $pdf->SetY($y_axe + $interligne + $deltay);
-            $pdf->SetX($posproperties);
-            $pdf->Cell(20, 20, $country, 0, 2, 'L', 0);
-            if ($country) $deltay+=5;
-
-            $pdf->SetY($y_axe + $interligne + $deltay);
-            $pdf->SetX($posproperties);
-            $pdf->Cell(20, 20, $duration, 0, 2, 'L', 0);
-            if ($duration) $deltay+=5;
-
-			if ($conf->global->CAT_SHOW_BARCODE && $barcode) {
-				$pdf->SetY($y_axe + $interligne + $deltay);
-				$pdf->SetX($posproperties);
-				$pdf->Cell(20, 20, $barcode, 0, 2, 'L', 0);
-				if ($barcode) $deltay += 5;
-			}
-
-			if (!empty($conf->global->CATALOG_RENDERING_OPTION_2)) $deltay = 8;
-			$pdf->SetY($y_axe + $interligne + $deltay);
-			$pdf->SetX($posproperties + (!empty($conf->global->CATALOG_RENDERING_OPTION_2)?20:0));
-			$pdf->Cell(20, 20, $stock, 0, 2, 'L', 0);
-			if ($stock) $deltay+=5;
 
             $pdf->SetY($y_axe + $interligne + 16); //On se décalle de 16 mm sous le nom du produit
             $pdf->SetX($x_axe); // On se positionne à $x_axe
             //$pdf->Cell(30,50,$pdf->Image($image,null,null,80,80),0,2,'L',0);
 
-            include_once DOL_DOCUMENT_ROOT . '/core/lib/images.lib.php';
+            /*include_once DOL_DOCUMENT_ROOT . '/core/lib/images.lib.php';
             $tmp = dol_getImageSize($image);
             $tmp['height'] = $tmp['height'] * 0.265;
             $tmp['width'] = $tmp['width'] * 0.265;
@@ -1013,15 +900,13 @@ class pdf_catalog
                     $height = $height * $maxwidth / $width;
                     $width = $maxwidth;
                 }
-            }
+            }*/
 
-            $pdf->Image($image, $x_axe + $offsetximage, $y_axe + $interligne + 16, 0, $height);
+            // $pdf->Image($image, $x_axe + $offsetximage, $y_axe + $interligne + 16, 0, $height);
             //$pdf->Image($image,$x_axe,$y_axe+$interligne+16,21,21);
 
-			// Une description de produit prend 50 mm en hauteur.
-            // On saute donc de 50 mm ou plus pour le produit suivant
-            if ($this->page_hauteur < 297) $interligne = $interligne + $heightofline;
-            else $interligne = $interligne + $heightofline + 7; // Une description de produit prend 50 mm en hauteur.
+            if ($this->page_hauteur < 297) $interligne = $interligne;
+            else $interligne = $interligne + 7;
 
             $i++;
 
