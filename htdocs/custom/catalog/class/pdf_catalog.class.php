@@ -568,29 +568,20 @@ class pdf_catalog
 
         $cat_label = null;
         $prov_label = null;
-        for ($j = 0; $j < $numlines; $j++) {
-			if ($prov_label != $lines[$j][25] && $conf->global->CAT_GROUP_BY_SUPPLIER && $lines[$j][24]>0) {
+        for ($j = 0; $j < $numlines; $j++)
+		{
+			if ($prov_label != $lines[$j][25] && $conf->global->CAT_GROUP_BY_SUPPLIER && $lines[$j][24]>0)
+			{
 				$cat_label = '';
-				if(!$conf->global->CAT_GROUP_BY_CATEGORY){
-					if($page > 2){
-						$pdf->AddPage();
-					}
-				}
-				else{
-					$pdf->AddPage();
-				}
+				$pdf->AddPage();
 				$pdf->SetFont(pdf_getPDFFont($outputlangs), 'I', 8);
-				//$strpage=$outputlangs->transnoentities("Page")." ".($pdf->PageNo())."/".$pdf->getAliasNbPages();
 				$pdf->SetX(180);
-				$pdf->Cell(30, 10, $outputlangs->convToOutputCharset($strpage), 0, 1, 'C');
 				$prov_label = $lines[$j][26];
 
-				$pdf->SetFont(pdf_getPDFFont($outputlangs), '', 30); // On sélectionne la police helvetica de taille 24
+				$pdf->SetFont(pdf_getPDFFont($outputlangs), '', 30);
 
-				$pdf->SetY(120); // On se positionne à Y=100
+				$pdf->SetY(120);
 				$pdf->SetX($this->marge_gauche);
-				$pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, $outputlangs->transnoentities("catSupplier"), 0, 'C');
-				$pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, '', 0, 'C');
 				$pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, $prov_label, 0, 'C');
 
 				$pdf->SetFont(pdf_getPDFFont($outputlangs), '', 30);
@@ -602,11 +593,6 @@ class pdf_catalog
 				$interligne = 0;
 
 				$this->_pagefoot($pdf, $page, $outputlangs);
-				if(!$conf->global->CAT_GROUP_BY_CATEGORY){
-					$pdf->AddPage();
-					$pdf->SetFont(pdf_getPDFFont($outputlangs), '', 12);
-					$page++;
-				}
 			}
 
 			if ($cat_label != $cat[$lines[$j][23]]->label && $conf->global->CAT_GROUP_BY_CATEGORY) {
