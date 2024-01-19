@@ -723,131 +723,44 @@ class pdf_catalog
                 $description .= '...';
             }
 
-            if ($conf->global->CAT_SHOW_PRICE) {
-                if ($conf->global->CAT_SHOW_PRICE_VAT == 1) {
-                    $price = $lines[$j][3];  // price_ttc
-                } else {
-                    $price = $lines[$j][2];  // price_ht
-                }
-                if ($price) {
+			/*
+			 * PRICE
+			 */
 
-                	if($divise){
-						$sql = 'SELECT r.rate, m.code FROM ' . MAIN_DB_PREFIX . 'multicurrency_rate as r, ' . MAIN_DB_PREFIX . 'multicurrency as m ';
-						$sql .= 'WHERE m.rowid = r.fk_multicurrency AND r.fk_multicurrency = ' . $divise . ' ORDER BY r.date_sync DESC LIMIT 1';
-						$resql = $db->query($sql);
-						if ($resql) {
-							$num = $db->num_rows($resql);
+			$vatPrice = $lines[$j][3];  // price_ttc
+			$wvatPrice = $lines[$j][2];  // price_ht
 
-							if ($num==1) {
-								$obj = $db->fetch_object($resql);
-								if($obj->code!=$conf->currency) {
-									$price = $price * $obj->rate;
-									$currency = $obj->code;
-								}
-								else{
-									$currency = $conf->currency;
-								}
-							}
+			if($divise){
+				$sql = 'SELECT r.rate, m.code FROM ' . MAIN_DB_PREFIX . 'multicurrency_rate as r, ' . MAIN_DB_PREFIX . 'multicurrency as m ';
+				$sql .= 'WHERE m.rowid = r.fk_multicurrency AND r.fk_multicurrency = ' . $divise . ' ORDER BY r.date_sync DESC LIMIT 1';
+				$resql = $db->query($sql);
+				if ($resql) {
+					$num = $db->num_rows($resql);
+
+					if ($num==1) {
+						$obj = $db->fetch_object($resql);
+						if($obj->code!=$conf->currency) {
+							$price = $wvatPrice * $obj->rate;
+							$currency = $obj->code;
+						}
+						else{
+							$currency = $conf->currency;
 						}
 					}
-                	else{
-                		$currency = $conf->currency;
-					}
-
-                    $pricewithcurrency = price(price2num($price, 'MT'), 0, $outputlangs, 0, -1, 2, empty($conf->global->CATALOG_SHOW_CURRENCY)?$currency:''); // ajout du signe de la devise
-                    $price = '';
-                    if (empty($conf->global->CATALOG_RENDERING_OPTION_2)) $price.= $outputlangs->transnoentities('Price') . ' : ';
-                    $price.= dol_html_entity_decode($pricewithcurrency,ENT_QUOTES);
-                }
-            }
-
-            if ($conf->global->CAT_SHOW_WEIGHT) {
-                $weight = $lines[$j][7];
-                if ($weight) {
-                    $weight_units = $lines[$j][8];
-                    $weight .= " " . $outputlangs->transnoentities(measuring_units_string($weight_units, "weight"));
-                    $weight = $outputlangs->transnoentities('Weight') . ' : ' . $weight;
-                }
-
-            }
-            if ($conf->global->CAT_SHOW_LENGTH) {
-                $length = $lines[$j][9];
-                if ($length) {
-                    $length_units = $lines[$j][10];
-                    $length .= " " . $outputlangs->transnoentities(measuring_units_string($length_units, "size"));
-                    $length = $outputlangs->transnoentities('Length') . ' : ' . $length;
-                }
-            }
-
-			if ($conf->global->CAT_SHOW_WIDTH) {
-				$width1 = $lines[$j][11];
-				if ($width1) {
-					$width1_units = $lines[$j][12];
-					$width1 .= " " . $outputlangs->transnoentities(measuring_units_string($width1_units, "size"));
-					$width1 = $langs->trans('Width1') . ' : ' . $width1;
 				}
 			}
-			if ($conf->global->CAT_SHOW_HEIGHT) {
-				$height1 = $lines[$j][13];
-				if ($height1) {
-					$height1_units = $lines[$j][14];
-					$height1 .= " " . $outputlangs->transnoentities(measuring_units_string($height1_units, "size"));
-					$height1 = $outputlangs->transnoentities('Height') . ' : ' . $height1;
-				}
+			else{
+				$currency = $conf->currency;
 			}
-            if ($conf->global->CAT_SHOW_SURFACE) {
-                $surface = $lines[$j][15];
-                if ($surface) {
-                    $surface_units = $lines[$j][16];
-                    $surface .= " " . $outputlangs->transnoentities(html_entity_decode(measuring_units_string($surface_units, "surface")));
-                    $surface = $outputlangs->transnoentities('Surface') . ' : ' . $surface;
-                }
 
-            }
-            if ($conf->global->CAT_SHOW_VOLUME) {
-                $volume = $lines [$j][17];
-                if ($volume) {
-                    $volume_units = $lines[$j][18];
-                    $volume .= " " . $outputlangs->transnoentities(html_entity_decode(measuring_units_string($volume_units, "volume")));
-                    $volume = $outputlangs->transnoentities('Volume') . ' : ' . $volume;
-                }
+			$pricewithcurrency = price(price2num($price, 'MT'), 0, $outputlangs, 0, -1, 2, empty($conf->global->CATALOG_SHOW_CURRENCY)?$currency:''); // ajout du signe de la devise
+			$price = '';
+			if (empty($conf->global->CATALOG_RENDERING_OPTION_2)) $price.= $outputlangs->transnoentities('Price') . ' : ';
+			$price.= dol_html_entity_decode($pricewithcurrency,ENT_QUOTES);
 
-            }
-            if ($conf->global->CAT_SHOW_STOCK) {
-                $stock='';
-            	if (empty($conf->global->CATALOG_RENDERING_OPTION_2)) $stock.= $outputlangs->trans("Stock").' : ';
-                $stock.= ($lines[$j][24]?$lines[$j][24]:0);
-            }
-
-
-            if ($conf->global->CAT_SHOW_PAYS_SOURCE) {
-                $country = getCountry($lines [$j][22], '', 0, $outputlangs, 0);
-                if ($country) {
-                    $country = $outputlangs->transnoentities('Country') . ' : ' . $country;
-                }
-            }
-
-            if ($conf->global->CAT_SHOW_DURATION) {
-                $duration = $lines[$j][6];
-                $duration_unit = substr($duration, -1);
-                $duration = substr($duration, 0, strlen($duration) - 1);
-                if ($duration) {
-                    if ($duration > 1) {
-                        $dur = array("i" => $outputlangs->transnoentities("Minutes"), "h" => $outputlangs->transnoentities("Hours"), "d" => $outputlangs->transnoentities("Days"), "w" => $outputlangs->transnoentities("Weeks"), "m" => $outputlangs->transnoentities("Months"), "y" => $outputlangs->transnoentities("Years"));
-                    } else if ($duration > 0) {
-                        $dur = array("i" => $outputlangs->transnoentities("Minute"), "h" => $outputlangs->transnoentities("Hour"), "d" => $outputlangs->transnoentities("Day"), "w" => $outputlangs->transnoentities("Week"), "m" => $outputlangs->transnoentities("Month"), "y" => $outputlangs->transnoentities("Year"));
-                    }
-                    $duration .= ' ' . $outputlangs->trans($dur[$duration_unit]);
-                    $duration = $outputlangs->transnoentities('Duration') . ' : ' . $duration;
-                }
-            }
-
-            if ($conf->global->CAT_SHOW_BARCODE) {
-                $barcode = $lines[$j][27];
-                if ($barcode) {
-                    $barcode = $langs->trans('BarcodeValue') . ' : ' . $barcode;
-                }
-            }
+			/*
+			* REF LINE
+			*/
 
 			$ref = $lines[$j][1];
 			$label = $lines[$j][20];
@@ -876,7 +789,8 @@ class pdf_catalog
 			$pdf->SetFont('','', $default_font_size);
 
 			$pdf->SetFillColor(212, 212, 212);  // Couleur de la cellule pour le nom du produit
-			$pdf->Cell($this->page_largeur - $this->marge_gauche - $this->marge_droite, 6, $nameproduit, 0, 2, 'L', 1); // Nom du produit
+			$pdf->Cell($this->page_largeur - $this->marge_gauche - $this->marge_droite, 6, $nameproduit, 0, 2, 'L', 1); // Product name
+			$pdf->Cell($this->page_largeur - $this->marge_gauche - $this->marge_droite, 6, $price, 0, 2, 'R', 1); // Price
 
 			// Description
 			$pos_y = $y_axe + $interligne + 16;
@@ -887,7 +801,6 @@ class pdf_catalog
 
             $pdf->SetY($y_axe + $interligne + 16); //On se décalle de 16 mm sous le nom du produit
             $pdf->SetX($x_axe); // On se positionne à $x_axe
-            //$pdf->Cell(30,50,$pdf->Image($image,null,null,80,80),0,2,'L',0);
 
             /*include_once DOL_DOCUMENT_ROOT . '/core/lib/images.lib.php';
             $tmp = dol_getImageSize($image);
