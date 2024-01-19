@@ -1,0 +1,64 @@
+# Dolibarr language file - fr_FR - catalog
+CHARSET=UTF-8
+
+Module400006Name=Catalogue
+Module400006Desc=Créer des catalogues de produits et services
+Permission4000061=Accès aux catalogues
+Permission4000062=Télécharger les catalogues
+
+CatalogSetup=Configuration du module Catalogue
+Catalogs=Catalogues
+Catalog=Catalogue
+Catalog0=Catalogue produits
+Catalog1=Catalogue services
+CatalogsForYear=Catalogues
+GeneralOptions=Options générales
+ShowPrice=Affichage des prix
+ProductOptions=Options du produit
+ShowWeight=Affichage poids
+ShowLength=Affichage longueur
+ShowWidth=Afficher largeur
+ShowHeight=Montrer haut
+Width1=Largeur
+ShowSurface=Affichage surface
+ShowVolume=Affichage volume
+ShowPaysSource=Affichage pays d'origine
+ShowStockQty=Affichage quantité en stock
+ShowBarcode=Affichage le code-barres
+BarcodeValue=Code barres
+ServicesOptions=Options de service
+ShowDuration=Affichage durée
+CatSetupSaved=Paramètres enregistrés
+ShowNoSell=Uniquement les produits/services à vendre
+ShowNoStock=Uniquement les produits/services en stock
+SendingCatalogue=Envoi catalogue
+WeSendCatalogueOfInterest=Nous vous envoyons un catalogue de votre intérêt
+FreeTextOnFooter=Mention complémentaire sur le catalogue
+NoCategorie=Non catégorisé
+NoCategorieDescr=Les produits/services qui ne sont pas dans une catégorie
+GroupByCategory=Groupe produits/services par catégorie
+GroupBySupplier=Groupe produits/services par fournisseurs
+CatalogTitle=Titre du catalogue. (Si elle est vide, il utilisera le titre par défaut)
+OrderByRef=Trier produits/services par numéro de référence
+CheckAll=Cocher tout
+CheckNone=Décocher tout
+Left=Gauche
+Right=Droite
+Middle=Centre
+TruncateName=Si le nom est trop long sera tronqué par...
+HighQualityImages=Images en haute qualité (non recommandé pour les catalogues avec de nombreux produits)
+ShowPriceVat=Afficher les prix avec TVA
+ErrorFileToDelete=Erreur à la suppression %s
+FileAddFinal=Fichier Pdf pour fixer la catalogue
+DateForPrices=Date pour les prix
+BySupplier=Par fournisseurs
+catSupplier=Fournisseur
+catCategorie=Catégorie
+MaxNbOfRecord=Nombre maximum d'enregistrements dans le document
+Divise=Monnaie
+
+#About
+AboutInfo=Ce module a été développé et distribué par 2byte.es Soluciones Informáticas <a href="http://www.2byte.es"> www.2byte.es </a> (Dolibarr Preferred Partner)
+MoreModules=Autres modules développés par 2byte.es sont disponibles sur leur boutique officielle
+MoreModulesLink=<a target="_blank" href="https://shop.2byte.es/">Cliquez pour aller à la boutique</a>
+ModulesHelp=Vous avez manuels disponibles et vidéos de nos modules <a target="_blank" externe href="https://liveagent.2byte.es/853598-M%C3%B3dulos-Oficiales-Externos-Dolibarr">ici</ a>

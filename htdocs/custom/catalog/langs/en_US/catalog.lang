@@ -1,0 +1,63 @@
+# Dolibarr language file - en_US - catalog
+CHARSET=UTF-8
+
+Module400006Name=Catalog
+Module400006Desc=Create catalogs of products and services
+Permission4000061=Access to catalogs
+Permission4000062=Download catalogs
+
+CatalogSetup=Catalog setup
+Catalogs=Catalogs
+Catalog=Catalog
+Catalog0=Products catalog
+Catalog1=Services catalog
+CatalogsForYear=Catalog
+GeneralOptions=General Options
+ShowPrice=Show price
+ProductOptions=Product options
+ShowWeight=Show weight
+ShowLength=Show length
+ShowSurface=Show surface
+ShowVolume=Show volume
+ShowPaysSource=Show origin country
+ShowStockQty=Show qty in stock
+ServicesOptions=Service options
+ShowDuration=Show duration
+ShowBarcode=Show Product Barcode
+BarcodeValue=Barcode
+CatSetupSaved=Setup saved
+ShowNoSell=Show only products/services for sale
+ShowNoStock=Show only products/services in stock
+SendingCatalogue=Sending catalog
+WeSendCatalogueOfInterest=We send you a catalog of your interest
+FreeTextOnFooter=Free text on footer
+NoCategorie=Uncategorised
+NoCategorieDescr=Products/services that are not in any category
+GroupByCategory=Group products/services by category
+CatalogTitle=Catalog title. (If empty it will use the default title)
+OrderByRef=Sort products/services by reference number
+CheckAll=Check All
+CheckNone=Uncheck All
+Left=Left
+Right=Right
+Middle=Middle
+TruncateName=If the name is too long will be truncated by...
+HighQualityImages=Pictures in high quality (Not recommended for catalogs with many products)
+ShowPriceVat=Show prices with VAT
+ErrorFileToDelete=Error to delete %s
+FileAddFinal=Other Pdf file to join into the catalog
+DateForPrices=Date for prices
+RenderingOptions=Rendering options
+FilterOptions=Filter options
+ByProductType=By type
+ByProductRef=By product ref
+ByCategory=By tag/category
+MaxNbOfRecord=Maximum number of record in document
+UseAlternativeRender=Use alternative rendering
+Divise=Badge
+
+#About
+AboutInfo=This module has been developed and distributed by 2byte.es Soluciones Informáticas <a href="http://www.2byte.es"> www.2byte.es </a> (Dolibarr Preferred Partner)
+MoreModules=Other modules developed by 2byte.es are available on their official store
+MoreModulesLink=<a target="_blank" href="https://shop.2byte.es/">Click to go to the shop</a>
+ModulesHelp=You have available guides and videos of our external modules<a target="_blank" href="https://liveagent.2byte.es/853598-M%C3%B3dulos-Oficiales-Externos-Dolibarr">here</a>

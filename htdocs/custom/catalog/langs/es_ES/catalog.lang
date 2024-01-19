@@ -1,0 +1,70 @@
+# Dolibarr language file - en_US - catalog
+CHARSET=UTF-8
+
+Module400006Name=Catálogo
+Module400006Desc=Crea catálogos de productos y servicios
+Permission4000061=Acceso a catálogos
+Permission4000062=Descarga de catálogos
+
+CatalogSetup=Configuración del módulo Catálogo
+Catalogs=Catálogos
+Catalog=Catálogo
+Catalog0=Catálogo productos
+Catalog1=Catálogo servicios
+CatalogsForYear=Catálogos
+GeneralOptions=Opciones generales
+ShowPrice=Mostrar precio
+ProductOptions=Opciones de producto
+ShowWeight=Mostrar peso
+ShowLength=Mostrar longitud
+ShowWidth=Mostrar ancho
+ShowHeight=Mostrar alto
+Width1=Ancho
+ShowSurface=Mostrar superficie
+ShowVolume=Mostrar volumen
+ShowPaysSource=Mostrar país de origen
+ShowStockQty=Mostrar cantidad en stock
+ShowBarcode=Mostrar código de barras
+BarcodeValue=Cod. barras
+ServicesOptions=Opciones de servicio
+ShowDuration=Mostrar duración
+CatSetupSaved=Configuración guardada
+ShowNoSell=Mostrar solo productos/servicios en venta
+ShowNoStock=Mostrar solo productos/servicios en stock
+SendingCatalogue=Envío de catálogo
+WeSendCatalogueOfInterest=Le enviamos un catálogo de su interés
+FreeTextOnFooter=Texto libre en el pie de página
+NoCategorie=Sin Categoría
+NoCategorieDescr=Productos/servicios que no están en ninguna categoría
+GroupByCategory=Agrupar productos/servicios por categoría
+GroupBySupplier=Agrupar productos/servicios por proveedor
+CatalogTitle=Título del catálogo. (Si está vacío se usará el título por defecto)
+OrderByRef=Ordenar los productos/servicios por número de referencia
+CheckAll=Marcar todo
+CheckNone=Desmarcar todo
+Left=Izquierda
+Right=Derecha
+Middle=Centro
+TruncateName=Si el nombre es muy largo se truncará por...
+HighQualityImages=Imágenes en alta calidad (Desaconsejado en catálogos con muchos productos)
+ShowPriceVat=Mostrar precios con IVA
+ErrorFileToDelete=Error al eliminar %s
+FileAddFinal=Archivo pdf a unir al catálogo
+DateForPrices=Fecha para los precios
+RenderingOptions=Opciones de visualización
+FilterOptions=Opciones de filtro
+ByProductType=Por tipo
+ByProductRef=Por referencia de producto
+BySupplier=Por proveedores
+catSupplier=Proveedor
+catCategorie=Categoría
+ByCategory=Por etiqueta/categoría
+MaxNbOfRecord=Número máximo de registro en el documento
+UseAlternativeRender=Usar visualización alternativa
+Divise=Divisa
+
+#About
+AboutInfo=Este módulo ha sido desarrollado y distribuido por 2byte.es Soluciones Informáticas, <a href="http://www.2byte.es">www.2byte.es</a> (Preferred Partner de Dolibarr)
+MoreModules=Otros módulos desarrollados por 2byte.es están disponibles en su tienda oficial
+MoreModulesLink=<a target="_blank" href="https://shop.2byte.es/">Pulse para acceder a la tienda</a>
+ModulesHelp=Tienes disponibles manuales y vídeos de nuestros módulos externos <a target="_blank" href="https://liveagent.2byte.es/853598-M%C3%B3dulos-Oficiales-Externos-Dolibarr">aquí</a>

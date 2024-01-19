@@ -1,0 +1,38 @@
+# Dolibarr language file - en_GB - catalog
+CHARSET=UTF-8
+
+Module400006Name=Catalogue
+Module400006Desc=Create catalogues of products and services
+Permission4000061=Access to catalogues
+Permission4000062=Download catalogues
+
+CatalogSetup=Catalogue Setup
+Catalogs=Catalogues
+Catalog=Catalogue
+Catalog0=Products catalogue
+Catalog1=Services catalogue
+CatalogsForYear=Catalogue
+ShowPrice=Show Price
+ProductOptions=Product Options
+ShowWeight=Show Weight
+ShowLength=Show Length
+ShowWidth=Show Width
+ShowHeight=Show Height
+Width1=Width
+ShowSurface=Show Surface
+ShowVolume=Show Volume
+ShowPaysSource=Show Origin Country
+ServicesOptions=Service Options
+ShowDuration=Show Duration
+ShowBarcode=Show Product Barcode
+BarcodeValue=Barcode
+SendingCatalogue=Our Product Catalogue
+WeSendCatalogueOfInterest=Hello,\n\nPlease see the attached catalogue of our products for your reference.\n\nRegards,\n\n
+CatalogTitle=Catalogue Title. (If empty it will use the default title)
+HighQualityImages=Pictures in high quality (Not recommended for catalogues with many products)
+ErrorFileToDelete=Error deleting file %s
+FileAddFinal=PDF file to merge to the catalogue
+GroupBySupplier=Group products/services by supplier
+BySupplier=By suppliers
+catSupplier=Supplier
+catCategorie=Category

@@ -1,0 +1,52 @@
+# Dolibarr language file - it_ITzxcvb - catalog
+CHARSET=UTF-8
+
+Module400006Name=Catalogo
+Module400006Desc=Creazione di cataloghi di prodotti e servizi
+Permission4000061=Accesso al catalogo
+Permission4000062=Scarica il catalogo
+
+CatalogSetup=Impostazioni Catalogo
+Catalogs=Cataloghi
+Catalog=Catalogo
+Catalog0=Catálogo prodotti
+Catalog1=Catalogo servizi
+CatalogsForYear=Catalogo
+GeneralOptions=Opzioni generali
+ShowPrice=Mostra il prezzo
+ProductOptions=Opzioni prodotto
+ShowWeight=Mostra peso
+ShowLength=Mostra lunghezza
+ShowSurface=Mostra superficie
+ShowVolume=Mostra volume
+ShowPaysSource=Mostra paese di origine
+ServicesOptions=Opzioni servizio
+ShowDuration=Mostra la durata
+ShowBarcode=Mostra codice a barre
+BarcodeValue=Cod. barre
+CatSetupSaved=Impostazioni salvate
+ShowNoSell=Mostra solo i prodotti/servizi in vendita
+ShowNoStock=Mostra solo i prodotti/servizi in magazzino
+SendingCatalogue=Invia catalogo
+WeSendCatalogueOfInterest=Vi inviamo un catalogo di tuo interesse
+FreeTextOnFooter=Testo libero sul piede
+NoCategorie=Non categorizzati
+NoCategorieDescr=Prodotti/Servizi che non sono in nessuna categoria
+GroupByCategory=Raggruppa prodotti/servizi per categoria
+CatalogTitle=Titolo categoria (se vuoto sarù utilizzato il titolo)
+OrderByRef=Ordina prodotti/servizi per n° rif.
+CheckAll=Seleziona tutti
+CheckNone=Deseleziona tutti
+Left=Sinistra
+Right=Destra
+Middle=Centro
+TruncateName=Se il nome è troppo lungo sarà troncato da...
+HighQualityImages=Immagine in alta qualità (Non raccomandato per cataloghi con elevato numero di prodotti)
+ShowPriceVat=Mostra prezzo compreso IVA
+ErrorFileToDelete=Errore durante l'eliminazione di: %s
+
+#About
+AboutInfo=Questo modulo è stato sviluppato e distribuito da 2byte.es Soluciones Informáticas <a href="http://www.2byte.es"> www.2byte.es </a> (Dolibarr Preferred Partner)
+MoreModules=Altri moduli sviluppati da 2byte.es sono disponibili nello store ufficiale
+MoreModulesLink=<a target="_blank" href="https://shop.2byte.es/">Clicca per visitare lo store online</a>
+ModulesHelp=Potrai trovare guide, tutorial e video per l'utilizzo dei moduli esterni <a target="_blank" href="http://liveagent.2byte.es/853598-M%C3%B3dulos-Oficiales-Externos-Dolibarr">qui</a>

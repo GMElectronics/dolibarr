@@ -1,0 +1,19 @@
+#catalog_list_cat li tr:hover{
+    background-color:#24A9DB;
+}
+
+#catalog_list_cat li tr:hover span{
+    background-color:#808080 !important;
+}
+#catalog_list_cat input{
+    vertical-align: middle;
+}
+table.noborder tr.liste_titre{
+    background: rgb(220,220,223) !important;
+}
+table.noborder tr.impair{
+    background: rgb(255,255,255) !important;
+}
+table.noborder tr.pair{
+    background: rgb(250,250,250) !important;
+}

@@ -1,0 +1,62 @@
+# Dolibarr language file - en_US - catalog
+CHARSET=UTF-8
+
+Module400006Name=Catàleg
+Module400006Desc=Crea catàlegs de productes i serveis
+Permission4000061=Accés a catàlegs
+Permission4000062=Descàrrega de catàlegs
+
+CatalogSetup=Configuració del mòdul Catàleg
+Catalogs=Catàlegs
+Catalog=Catàleg
+Catalog0=Catàleg productes
+Catalog1=Catàleg serveis
+CatalogsForYear=Catàlegs
+GeneralOptions=Opcions generals
+ShowPrice=Mostrar preu
+ProductOptions=Opcions de producte
+ShowWeight=Mostrar pes
+ShowLength=Mostrar longitud
+ShowSurface=Mostrar superfície
+ShowVolume=Mostrar volum
+ShowPaysSource=Mostrar país d'origen
+ShowStockQty=Mostrar quantitat en stock
+ShowBarcode=Mostrar códig de barres
+BarcodeValue=Cod. barres
+ServicesOptions=Opcions de servei
+ShowDuration=Mostrar duració
+CatSetupSaved=Configuració guardada
+ShowNoSell=Mostrar sols productes/servicis a la venda
+ShowNoStock=Mostrar sols productes/servicis en stock
+SendingCatalogue=Enviament de catàleg
+WeSendCatalogueOfInterest=Li enviem un catàleg del seu interés
+FreeTextOnFooter=Text lliure a peu de pàgina
+NoCategorie=Sense Categoria
+NoCategorieDescr=Productes/servicis que no estan en cap categoria
+GroupByCategory=Agrupar productes/servicis per categoria
+CatalogTitle=Títol del catáleg. (Si està buit s'utilitzara el títol per defecte)
+OrderByRef=Ordenar els productes/servicis per número de referència
+CheckAll=Marcar tot
+CheckNone=Desmarcar tot
+Left=Esquerra
+Right=Dreta
+Middle=Centre
+TruncateName=Si el nom és molt llarg es truncarà per...
+HighQualityImages=Imatges en alta qualitat (Desaconsellat en catàlegs amb molts productes)
+ShowPriceVat=Mostrar preus amb IVA
+ErrorFileToDelete=Error al esborrar %s
+FileAddFinal=Arxiu pdf a unir amb el catàleg
+DateForPrices=Data per als preus
+RenderingOptions=Opcions de visualització
+FilterOptions=Opcions de filtre
+ByProductType=Per tipus
+ByProductRef=Per referència de producte
+ByCategory=Per etiqueta/categoria
+MaxNbOfRecord=Màxim nombre de elements al document
+UseAlternativeRender=Utilitzar visualització alternativa
+
+#About
+AboutInfo=Aquest mòdul ha estat desenvolupat i distribuït per 2byte.es Soluciones Informáticas, <a href="http://www.2byte.es"> www.2byte.es </a> (Preferred Partner de Dolibarr)
+MoreModules=Altres mòduls desenvolupats per 2byte.es estan disponibles a la seva botiga oficial
+MoreModulesLink=<a target="_blank" href="https://shop.2byte.es/">Prem per accedir a la botiga</a>
+ModulesHelp=Tens disponibles manuals i vídeos dels nostres mòduls externs <a target="_blank" href="https://liveagent.2byte.es/853598-M%C3%B3dulos-Oficiales-Externos-Dolibarr">ací</a>
