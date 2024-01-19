@@ -173,7 +173,7 @@ class pdf_gme extends ModelePDFPropales
 		$this->contentFontSize = 10;
 		$this->titleFontSize = 14;
 		$this->subTitleFontSize = 11;
-		$this->footerContent = 'G.M.Electronics SRL - Rue de Termonde, 140 - 1083 Ganshoren - www.gmelectronics.be – info@gmelectronics.be BE0426.751.795';
+		$this->footerContent = 'G.M.Electronics SRL - Avenue Vésale, 23 - 1300 Wavre - www.gmelectronics.be – info@gmelectronics.be BE0426.751.795';
 		$this->contentHeaderCustomerMarginLeft = 118;
 		$this->contentHeaderCustomerMarginTop = 18;
 		$this->marge_basse = 40;
@@ -1060,14 +1060,9 @@ class pdf_gme extends ModelePDFPropales
 		$ddo = dol_htmlentitiesbr($outputlangs->convToOutputCharset($object->array_options ['options_ddo'])) ;
 		$vdo = dol_print_date($object->fin_validite,"day",false,$outputlangs,true);
 		$dded = dol_htmlentitiesbr($outputlangs->convToOutputCharset($object->array_options ['options_dded']));
-		$cdp = $outputlangs->transnoentities("PaymentCondition".$object->cond_reglement_code);
+		$cdp = dol_htmlentitiesbr($outputlangs->convToOutputCharset($object->array_options ['options_cdp']));
 		$cg = dol_htmlentitiesbr($outputlangs->convToOutputCharset($object->array_options ['options_cg']));
-		if (!empty($object->delivery_date)){
-			$ddl = dol_print_date($object->delivery_date, "daytext", false, $outputlangs, true);
-		} else {
-			$ddl = $outputlangs->transnoentities("AvailabilityType".$object->availability_code);
-		}
-
+		$ddl = dol_htmlentitiesbr($outputlangs->convToOutputCharset($object->array_options ['options_ddl']));
 
 		$contenu = array($ddo, $dded, $vdo, $cdp, $cg, $ddl);
 
@@ -1207,7 +1202,7 @@ class pdf_gme extends ModelePDFPropales
 	{
 		global $conf, $user;
 
-		$user->fetch($object->user_author_id);
+		/*$user->fetch($object->user_author_id);
 
 		if($user->photo != '') {
 			$pdf->Image($conf->user->dir_output.'/'.get_exdir($user->id, 2, 0, 1, $user, 'user').'/'.$user->photo,90,263,24,22);
@@ -1224,9 +1219,12 @@ class pdf_gme extends ModelePDFPropales
 		$pdf->MultiCell(60,4,' '.$user->email,0,'L',0,1,125,$pdf->GetY()+1);
 
 		$pdf->Image($this->urlPictoPhone,121,$pdf->GetY()+1,4,4);
-		$pdf->MultiCell(60,4,' '.$user->office_phone,0,'L',0,1,125,$pdf->GetY()+1);
+		$pdf->MultiCell(60,4,' '.$user->office_phone,0,'L',0,1,125,$pdf->GetY()+1);*/
 
 		//Donnée GME + num Page
+		$pdf->SetFont('Helvetica','', 9);
+		$pdf->SetTextColor(64,64,64);
+		$pdf->SetDrawColor(153,204,102);
 		$pdf->SetFontSize(7);
 		$pdf->MultiCell(0,2,$this->footerContent,0,'C',0,0,20,288);
 		$pdf->MultiCell(177,2, $pdf->PageNo().'/'.$pdf->getAliasNbPages(),0,'R',0,0,20,288);
