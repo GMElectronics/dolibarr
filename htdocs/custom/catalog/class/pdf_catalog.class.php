@@ -541,17 +541,17 @@ class pdf_catalog
         $pdf->SetFont(pdf_getPDFFont($outputlangs), '', $default_font_size);
 
 		$headerheight = 45;
-        $y_axe = $headerheight;              // Position en Y par défaut
-        $x_axe = $this->marge_gauche;        // Position en X par défaut
-        $interligne = 0;      // Interligne entre chaque produit. Initialisée à 0                                                    //
-        $i = 0;               // Variable pour boucle
+        $y_axe = $headerheight;             // Position en Y par défaut
+        $x_axe = $this->marge_gauche;       // Position en X par défaut
+        $interligne = 0;      				// Interligne entre chaque produit. Initialisée à 0
+        $i = 0;               				// Variable pour boucle
         $page = 2;
         $heightlogo = 40;
         $maxwidthlogo = 120;
-		$max = empty($conf->global->CATALOG_MAXNB_PERPAGE)?6:$conf->global->CATALOG_MAXNB_PERPAGE;             // Max nb or record per page
+		$max = 30;             				// Max nb or record per page
 		$height = 20;
 		$maxwidth = 30;
-		if ($this->page_largeur < 210) // To work with US executive format
+		if ($this->page_largeur < 210) 		// To work with US executive format
 		{
 			$height = 18;
 			$maxwidth = 25;
