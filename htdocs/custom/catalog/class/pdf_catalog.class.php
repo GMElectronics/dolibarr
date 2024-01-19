@@ -705,23 +705,6 @@ class pdf_catalog
             if (dol_textishtml($description)) $description = preg_replace('/__N__/', '<br>', $description);
             else $description = preg_replace('/__N__/', "\n", $description);
             $description = dol_htmlentitiesbr($description, 1);
-            //$description=$outputlangs->convToOutputCharset(strip_tags($description));     // On enlève les tags HTML
-
-            // Description
-            $tamano = 300;
-            if ($this->page_hauteur < 297) $tamano = 250;
-
-            if (strlen($description) > $tamano) {
-                $contador = 0;
-                $arrayDescription = explode(' ', $description);
-                $description = '';
-
-                while ($tamano >= strlen($description) + strlen($arrayDescription[$contador])) {
-                    $description .= ' ' . $arrayDescription[$contador];
-                    $contador++;
-                }
-                $description .= '...';
-            }
 
 			/*
 			 * PRICE
@@ -729,34 +712,8 @@ class pdf_catalog
 
 			$vatPrice = $lines[$j][3];  // price_ttc
 			$wvatPrice = $lines[$j][2];  // price_ht
-
-			if($divise){
-				$sql = 'SELECT r.rate, m.code FROM ' . MAIN_DB_PREFIX . 'multicurrency_rate as r, ' . MAIN_DB_PREFIX . 'multicurrency as m ';
-				$sql .= 'WHERE m.rowid = r.fk_multicurrency AND r.fk_multicurrency = ' . $divise . ' ORDER BY r.date_sync DESC LIMIT 1';
-				$resql = $db->query($sql);
-				if ($resql) {
-					$num = $db->num_rows($resql);
-
-					if ($num==1) {
-						$obj = $db->fetch_object($resql);
-						if($obj->code!=$conf->currency) {
-							$price = $wvatPrice * $obj->rate;
-							$currency = $obj->code;
-						}
-						else{
-							$currency = $conf->currency;
-						}
-					}
-				}
-			}
-			else{
-				$currency = $conf->currency;
-			}
-
-			$pricewithcurrency = price(price2num($price, 'MT'), 0, $outputlangs, 0, -1, 2, empty($conf->global->CATALOG_SHOW_CURRENCY)?$currency:''); // ajout du signe de la devise
-			$price = '';
-			if (empty($conf->global->CATALOG_RENDERING_OPTION_2)) $price.= $outputlangs->transnoentities('Price') . ' : ';
-			$price.= dol_html_entity_decode($pricewithcurrency,ENT_QUOTES);
+			$pricewithcurrency = price(price2num($wvatPrice, 'MT'), 0, $outputlangs, 0, -1, 2, '€');
+			$price= dol_html_entity_decode($pricewithcurrency,ENT_QUOTES);
 
 			/*
 			* REF LINE
