@@ -566,50 +566,27 @@ class pdf_catalog
         $categories->label = $outputlangs->transnoentities("NoCategorie");
         $cat[0] = $categories;
 
+		/*
+		 * CATEGORIES
+		 */
+
         $cat_label = null;
         $prov_label = null;
         for ($j = 0; $j < $numlines; $j++)
 		{
-			if ($prov_label != $lines[$j][25] && $conf->global->CAT_GROUP_BY_SUPPLIER && $lines[$j][24]>0)
+			if ($cat_label != $cat[$lines[$j][23]]->label)
 			{
-				$cat_label = '';
-				$pdf->AddPage();
-				$pdf->SetFont(pdf_getPDFFont($outputlangs), 'I', 8);
-				$pdf->SetX(180);
-				$prov_label = $lines[$j][26];
-
-				$pdf->SetFont(pdf_getPDFFont($outputlangs), '', 30);
-
-				$pdf->SetY(120);
-				$pdf->SetX($this->marge_gauche);
-				$pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, $prov_label, 0, 'C');
-
-				$pdf->SetFont(pdf_getPDFFont($outputlangs), '', 30);
-				$this->myfoot($pdf, $page, $outputlangs, $footer);
-				$this->_pagehead($pdf, $page);
-
-				$i = 0;
-				$y_axe = $headerheight;
-				$interligne = 0;
-
-				$this->_pagefoot($pdf, $page, $outputlangs);
-			}
-
-			if ($cat_label != $cat[$lines[$j][23]]->label && $conf->global->CAT_GROUP_BY_CATEGORY) {
-				//$i = 0;
-				//$y_axe=30;
-				//$interligne=0;
 				$pdf->AddPage();
 				$pdf->SetFont(pdf_getPDFFont($outputlangs), 'I', 40);
-				//$strpage=$outputlangs->transnoentities("Page")." ".($pdf->PageNo())."/".$pdf->getAliasNbPages();
 				$pdf->SetX(180);
-				$pdf->Cell(30, 10, $outputlangs->convToOutputCharset($strpage), 0, 1, 'C');
+
 				if (!empty($cat[$lines[$j][23]]->multilangs[$outputlangs->defaultlang])) {
 					$cat_label = $cat[$lines[$j][23]]->multilangs[$outputlangs->defaultlang][label];
 				} else {
 					$cat_label = $cat[$lines[$j][23]]->label;
 				}
-				$pdf->SetFont(pdf_getPDFFont($outputlangs), '', 40); // On sélectionne la police helvetica de taille 24
+
+				$pdf->SetFont(pdf_getPDFFont($outputlangs), '', 40);
 				$logo = $this->getImageCategory($lines[$j][23]);
 
 				include_once DOL_DOCUMENT_ROOT . '/core/lib/images.lib.php';
@@ -628,8 +605,6 @@ class pdf_catalog
 
 				$pdf->SetY(120); // On se positionne à Y=100
 				$pdf->SetX($this->marge_gauche);
-				$pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, $outputlangs->transnoentities("catCategorie"), 0, 'C');
-				$pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, '', 0, 'C');
 				$pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, $cat_label, 0, 'C');
 
 				$pdf->SetFont(pdf_getPDFFont($outputlangs), '', 12);
@@ -656,6 +631,7 @@ class pdf_catalog
                 $pdf->SetFont(pdf_getPDFFont($outputlangs), '', 12);
                 $page++;
             }
+
             if ($i == 0) {
                 // Output the header and footers before writing first record of page
                 $this->_pagefoot($pdf, $page, $outputlangs);
@@ -708,8 +684,7 @@ class pdf_catalog
 			$pdf->SetFont('','', $default_font_size);
 
 			$pdf->SetFillColor(212, 212, 212);  // Couleur de la cellule pour le nom du produit
-			$pdf->Cell($this->page_largeur - $this->marge_gauche - $this->marge_droite, 6, $nameproduit, 0, 2, 'L', 1); // Product name
-			$pdf->Cell($this->page_largeur - $this->marge_gauche - $this->marge_droite, 6, $price, 0, 2, 'R', 1); // Price
+			$pdf->Cell($this->page_largeur - $this->marge_gauche - $this->marge_droite, 6, $nameproduit.' '.$price, 0, 2, 'L', 1); // Product name
 
 			// Description
 			$pos_y = $y_axe + $interligne + 16;
