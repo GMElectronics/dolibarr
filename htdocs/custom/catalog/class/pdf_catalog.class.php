@@ -537,13 +537,6 @@ class pdf_catalog
     {
         global $conf, $db, $langs;
 
-        if ($conf->global->CAT_TRUNCATE_NAME == 0)
-            $truncate = 'left';
-        else if ($conf->global->CAT_TRUNCATE_NAME == 1)
-            $truncate = 'middle';
-        else
-            $truncate = 'right';
-
 		$default_font_size = pdf_getPDFFontSize($outputlangs);	// Must be after pdf_getInstance
         $pdf->SetFont(pdf_getPDFFont($outputlangs), '', $default_font_size);
 
@@ -553,32 +546,16 @@ class pdf_catalog
         $interligne = 0;      // Interligne entre chaque produit. Initialisée à 0                                                    //
         $i = 0;               // Variable pour boucle
         $page = 2;
-
-        $max = empty($conf->global->CATALOG_MAXNB_PERPAGE)?4:$conf->global->CATALOG_MAXNB_PERPAGE;             	   // Max nb or record per page
         $heightlogo = 40;
         $maxwidthlogo = 120;
-        $height = 35;
-        $maxwidth = 40;
-        $offsetximage = 5;
-        $heightofline = 50;
-        if ($this->page_largeur < 210) // To work with US executive format
-        {
-        	$height = 25;
-        	$maxwidth = 35;
-        }
-        if (! empty($conf->global->CATALOG_RENDERING_OPTION_2))
-        {
-        	$max = empty($conf->global->CATALOG_MAXNB_PERPAGE)?6:$conf->global->CATALOG_MAXNB_PERPAGE;             // Max nb or record per page
-        	$height = 20;
-        	$maxwidth = 30;
-        	$offsetximage = 10;
-        	$heightofline = 30;
-            if ($this->page_largeur < 210) // To work with US executive format
-	        {
-	        	$height = 18;
-	        	$maxwidth = 25;
-	        }
-        }
+		$max = empty($conf->global->CATALOG_MAXNB_PERPAGE)?6:$conf->global->CATALOG_MAXNB_PERPAGE;             // Max nb or record per page
+		$height = 20;
+		$maxwidth = 30;
+		if ($this->page_largeur < 210) // To work with US executive format
+		{
+			$height = 18;
+			$maxwidth = 25;
+		}
 
         $outputlangs->load('bills');
 
@@ -721,8 +698,7 @@ class pdf_catalog
 
 			$ref = $lines[$j][1];
 			$label = $lines[$j][20];
-
-            $nameproduit = $ref . " - " . dol_trunc($label, 70 - dol_strlen($ref), $truncate);
+            $nameproduit = $ref . " - " . $label;
 
             $image = dol_buildpath('/public/theme/common/nophoto.png', 0);
             if ($lines[$j][0]) {
