@@ -472,7 +472,7 @@ class pdf_catalog
     }
 
     /**
-     *  Return path of a catergory image
+     *  Return path of a category image
      * @param        int $idCat Id of Category
      * @return string Image path
      */
@@ -542,15 +542,9 @@ class pdf_catalog
 		{
 			if ($cat_label != $cat[$lines[$j][23]]->label)
 			{
-				$pdf->AddPage();
-				$pdf->SetFont(pdf_getPDFFont($outputlangs), 'I', 40);
+				$pdf->SetFont(pdf_getPDFFont($outputlangs), '', 20);
 				$pdf->SetX(180);
-
-				if (!empty($cat[$lines[$j][23]]->multilangs[$outputlangs->defaultlang])) {
-					$cat_label = $cat[$lines[$j][23]]->multilangs[$outputlangs->defaultlang][label];
-				} else {
-					$cat_label = $cat[$lines[$j][23]]->label;
-				}
+				$cat_label = $cat[$lines[$j][23]]->label;
 
 				$pdf->SetFont(pdf_getPDFFont($outputlangs), '', 40);
 				$logo = $this->getImageCategory($lines[$j][23]);
@@ -582,9 +576,7 @@ class pdf_catalog
 				$interligne = 0;
 
 				$this->_pagefoot($pdf, $page, $outputlangs);
-				$pdf->AddPage();
 				$pdf->SetFont(pdf_getPDFFont($outputlangs), '', 12);
-				$page++;
 			}
 
             if ($i == $max)  // On vérifie si on a atteint le nombre de produit max par page
