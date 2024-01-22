@@ -199,7 +199,7 @@ class pdf_catalog
         $sql .= "c.fk_categorie,";
 		$sql .= "p.label ASC";
 		$sql.= $this->db->plimit($search_maxnb);
-echo $sql;
+
         dol_syslog(get_class($this) . "::write_file sql=" . $sql);
         $result = $this->db->query($sql);
 
