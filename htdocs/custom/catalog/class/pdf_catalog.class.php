@@ -640,7 +640,7 @@ class pdf_catalog
 			$pos_y = $y_axe + $interligne + 16;
 			$pos_x = $x_axe + $maxwidth + 5;
 
-            $deltay = 8;
+            $deltay = 6;
 
             $pdf->SetY($y_axe + $interligne + 16); //On se décalle de 16 mm sous le nom du produit
             $pdf->SetX($x_axe); // On se positionne à $x_axe
