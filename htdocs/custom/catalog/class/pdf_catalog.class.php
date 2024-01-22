@@ -434,7 +434,7 @@ class pdf_catalog
         if ($page > 1) // Si on est pas sur la première page
         {
             //Positionnement à 1,5 cm du haut
-            $pdf->SetY(15);
+            $pdf->SetY(270);
             $pdf->SetFont(pdf_getPDFFont($outputlangs), 'I', 8);
 
             //Num page
@@ -447,9 +447,8 @@ class pdf_catalog
 			{
 				$strpage = $outputlangs->transnoentities("Page")." ".$page;
 			}
-            $pdf->SetX($this->page_largeur - $this->marge_droite - 40);
+            $pdf->SetX($this->page_largeur - $this->marge_droite - 20);
             $pdf->Cell(30, 10, $outputlangs->convToOutputCharset($strpage), 0, 1, 'C');
-            //$pdf->Cell(30, 10, " ", 0, 1, 'J');
         }
     }
 
