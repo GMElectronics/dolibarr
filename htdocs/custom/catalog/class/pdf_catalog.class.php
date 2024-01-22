@@ -514,7 +514,7 @@ class pdf_catalog
         $page = 2;
         $heightlogo = 40;
         $maxwidthlogo = 120;
-		$max = 30;             				// Max nb or record per page
+		$max = 50;             				// Max nb or record per page
 		$height = 20;
 		$maxwidth = 30;
 		if ($this->page_largeur < 210) 		// To work with US executive format
