@@ -543,11 +543,9 @@ class pdf_catalog
 			if ($cat_label != $cat[$lines[$j][23]]->label)
 			{
 				$pdf->AddPage();
+				$pdf->SetX(20);
 				$pdf->SetFont(pdf_getPDFFont($outputlangs), '', 20);
-				$pdf->SetX(180);
 				$cat_label = $cat[$lines[$j][23]]->label;
-
-				$pdf->SetFont(pdf_getPDFFont($outputlangs), '', 40);
 				$logo = $this->getImageCategory($lines[$j][23]);
 
 				include_once DOL_DOCUMENT_ROOT . '/core/lib/images.lib.php';
@@ -564,7 +562,7 @@ class pdf_catalog
 					$pdf->Image($logo, $absx, 40, 0, $heightlogo);
 				}
 
-				$pdf->SetY(120); // On se positionne à Y=100
+				$pdf->SetY(6);
 				$pdf->SetX($this->marge_gauche);
 				$pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, $cat_label, 0, 'C');
 
