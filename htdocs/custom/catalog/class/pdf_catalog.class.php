@@ -633,8 +633,8 @@ class pdf_catalog
 
 			$pdf->SetFont(pdf_getPDFFont($outputlangs), '', 9);
 			if($i % 2 == 0){$pdf->SetFillColor(212, 212, 212);}else{$pdf->SetFillColor(255, 255, 255);}
-			$pdf->Cell($this->page_largeur - $this->marge_gauche - $this->marge_droite, 2, $nameproduit, 0, 0, 'L', 1);
-			$pdf->Write(2, $price);
+			$pdf->Cell($this->page_largeur - $this->marge_gauche - $this->marge_droite - 50, 2, $nameproduit, 0, 0, 'L', 1);
+			$pdf->Cell(50, 2, $price, 0, 0, 'L', 1);
 
             /*include_once DOL_DOCUMENT_ROOT . '/core/lib/images.lib.php';
             $tmp = dol_getImageSize($image);
