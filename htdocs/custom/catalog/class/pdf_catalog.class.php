@@ -134,20 +134,8 @@ class pdf_catalog
         }
         $sql .= ", p.tva_tx, p.tosell, p.fk_product_type, p.duration";
         $sql .= ", p.weight, p.weight_units, p.length, p.length_units";
-		if($conf->global->CAT_SHOW_WIDTH) {
-			$sql .= ", p.width, p.width_units";
-		}
-		if($conf->global->CAT_SHOW_HEIGHT){
-			$sql .= ", p.height, p.height_units";
-		}
-        if($conf->global->CAT_SHOW_BARCODE){
-            $sql .= ", p.barcode";
-        }
         $sql .= ", p.surface, p.surface_units, volume, p.volume_units";
-        if ($conf->global->MAIN_MULTILANGS) {
-            $sql .= ", (SELECT pl.label FROM " . MAIN_DB_PREFIX . "product_lang as pl WHERE pl.fk_product = p.rowid AND pl.lang = '" . $outputlangs->defaultlang . "') as label_lang";
-            $sql .= ", (SELECT pl.description FROM " . MAIN_DB_PREFIX . "product_lang as pl WHERE pl.fk_product = p.rowid AND pl.lang = '" . $outputlangs->defaultlang . "') as descr_lang";
-        }
+
 
         $sql .= ", p.label, p.description, p.fk_country, p.stock";
         if ($conf->global->CAT_GROUP_BY_CATEGORY) {
@@ -172,7 +160,6 @@ class pdf_catalog
             $sql .= " AND p.stock > 0";
         }
         $sql .= " AND p.entity IN (" . getEntity('product', 1) . ")";
-        //$sql .=" AND s.fournisseur = 1";
         if ($search_ref) $sql.=natural_search('p.ref', $search_ref);
 		if (!empty($socid)) {
 			$numcat = count($socid);
@@ -211,39 +198,13 @@ class pdf_catalog
         $sql .= " GROUP BY p.rowid, p.ref, p.price, p.price_ttc";
         $sql .= ", p.tva_tx, p.tosell, p.fk_product_type, p.duration";
         $sql .= ", p.weight, p.weight_units, p.length, p.length_units";
-        if($conf->global->CAT_SHOW_WIDTH) {
-			$sql .= ", p.width, p.width_units";
-		}
-        if($conf->global->CAT_SHOW_HEIGHT){
-        	$sql .= ", p.height, p.height_units";
-		}
-        if($conf->global->CAT_SHOW_BARCODE){
-            $sql .= ", p.barcode";
-        }
         $sql .= ", p.surface, p.surface_units, volume, p.volume_units";
         $sql .= ", p.label, p.description, p.fk_country, p.stock";
-        //mysql strict
         $sql .= ', s.nom';
-        //
-        if ($conf->global->CAT_GROUP_BY_CATEGORY) {
-            $sql .= ", c.fk_categorie";
-        }
-		if ($conf->global->CAT_GROUP_BY_SUPPLIER) {
-			$sql .= ", pfp.fk_soc";
-		}
-
+		$sql .= ", c.fk_categorie";
         $sql .= " ORDER BY ";
-		if ($conf->global->CAT_GROUP_BY_SUPPLIER) {
-			$sql .= "pfp.fk_soc,";
-		}
-        if ($conf->global->CAT_GROUP_BY_CATEGORY) {
-            $sql .= "c.fk_categorie,";
-        }
-        if ($conf->global->CAT_ORDER_BY_REF) {
-            $sql .= "p.ref ASC";
-        } else {
-            $sql .= "p.label ASC";
-        }
+        $sql .= "c.fk_categorie,";
+		$sql .= "p.label ASC";
 		$sql.= $this->db->plimit($search_maxnb);
 
         dol_syslog(get_class($this) . "::write_file sql=" . $sql);
@@ -352,13 +313,9 @@ class pdf_catalog
             $pdf->setPrintFooter(false);
         }
 
-        if ($pdf_input !== null && $position == 0) {
-            $this->add_pdf($pdf, $pdf_input);
-        }
+        if ($pdf_input !== null && $position == 0) $this->add_pdf($pdf, $pdf_input);
 
-        //$pdf=new PDF();  // On crée une nouvelle instance pour le PDF
         $pdf->AddFont('helvetica', '', 'helvetica.php'); // On ajoute la police helvetica
-        //$pdf->AliasNbPages(); // Allias pour le Nbre de page. Par défaut {nb}
         $pdf->AddPage();      // On ajoute une page. La première
         $pdf->SetFont(pdf_getPDFFont($outputlangs), '', 24); // On sélectionne la police helvetica de taille 24
 
@@ -371,6 +328,7 @@ class pdf_catalog
             $title .= ' - ' . dol_print_date(dol_mktime(0, 0, 0, $this->month, $this->day, $this->year), "daytext", false, $outputlangs, true);
             $title = strip_tags($title);
         }
+
         $this->_pagehead($pdf, 1);
 
         $pdf->SetY(120); // On se positionne à Y=100
@@ -408,7 +366,9 @@ class pdf_catalog
     public function add_pdf(&$pdf, &$pdf_input)
     {
         $pagecount = $pdf->setSourceFile($pdf_input);
-        for ($i = 1; $i <= $pagecount; $i++) {
+
+        for ($i = 1; $i <= $pagecount; $i++)
+		{
             $tplidx = $pdf->importPage($i);
             $s = $pdf->getTemplatesize($tplidx);
             $pdf->AddPage($s['h'] > $s['w'] ? 'P' : 'L');
@@ -427,23 +387,29 @@ class pdf_catalog
         global $conf, $mysoc;
 
 		$pdf->setXY($this->marge_gauche, $this->marge_haute);
-
         $logo = $conf->mycompany->dir_output . '/logos/' . $mysoc->logo;
-        if (is_readable($logo) && !empty($mysoc->logo)) {
+
+        if (is_readable($logo) && !empty($mysoc->logo))
+		{
             if ($page != 1) 	// Logo on header
             {
                 $height = pdf_getHeightForLogo($logo);
 				$maxheight = 50;
+
 			    if ($height > $maxheight)
 				{
 					$height = $maxheight;
 				}
+
                 $pdf->Image($logo, 10, 8, 0, $height);
-            } else {			// Logo on first page
+            }
+			else
+			{			// Logo on first page
                 $height = 60;
                 $maxwidth = 150;
                 include_once DOL_DOCUMENT_ROOT . '/core/lib/images.lib.php';
                 $tmp = dol_getImageSize($logo);
+
                 if ($tmp['height']) {
                     $width = $height * $tmp['width'] / $tmp['height'];
                     if ($width > $maxwidth) {
@@ -451,6 +417,7 @@ class pdf_catalog
                         $width = $maxwidth;
                     }
                 }
+
                 $absx = ($this->page_largeur - $width) / 2;
                 $pdf->Image($logo, $absx, 40, 0, $height);
             }
