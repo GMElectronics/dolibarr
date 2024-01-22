@@ -144,6 +144,14 @@ class pdf_catalog
             $sql .= " LEFT JOIN " . MAIN_DB_PREFIX . "product_price as pp on pp.fk_product=p.rowid AND pp.price_level = " . $catlevel;
         }
         $sql .= " WHERE p.fk_product_type =" . $type;
+
+        if ($conf->global->CAT_SHOW_NO_SELL) {
+            $sql .= " AND p.tosell=1";
+        }
+        if ($conf->global->CAT_SHOW_NO_STOCK && ($type == 0 || $conf->global->STOCK_SUPPORTS_SERVICES)) {
+            $sql .= " AND p.stock > 0";
+        }
+
         $sql .= " AND p.entity IN (" . getEntity('product', 1) . ")";
         if ($search_ref) $sql.=natural_search('p.ref', $search_ref);
 		if (!empty($socid)) {
