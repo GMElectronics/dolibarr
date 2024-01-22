@@ -543,8 +543,7 @@ class pdf_catalog
 			if ($cat_label != $cat[$lines[$j][23]]->label)
 			{
 				$pdf->AddPage();
-				$pdf->SetX(20);
-				$pdf->SetFont(pdf_getPDFFont($outputlangs), '', 20);
+				$pdf->SetFont(pdf_getPDFFont($outputlangs), '', 15);
 				$cat_label = $cat[$lines[$j][23]]->label;
 				$logo = $this->getImageCategory($lines[$j][23]);
 
@@ -562,9 +561,9 @@ class pdf_catalog
 					$pdf->Image($logo, $absx, 40, 0, $heightlogo);
 				}
 
-				$pdf->SetY(6);
+				$pdf->SetY(15);
 				$pdf->SetX($this->marge_gauche);
-				$pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, $cat_label, 0, 'C');
+				$pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, $cat_label, 0, 'L');
 
 				$pdf->SetFont(pdf_getPDFFont($outputlangs), '', 12);
 				$this->myfoot($pdf, $page, $outputlangs, $footer);
