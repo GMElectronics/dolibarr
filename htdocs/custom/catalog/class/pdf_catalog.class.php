@@ -632,8 +632,8 @@ class pdf_catalog
             	$maxwidth = 35;
             }
 
-			$pdf->SetFont(pdf_getPDFFont($outputlangs), '', 5);
-			if($i % 2) $pdf->SetFillColor(212, 212, 212);  // Couleur de la cellule pour le nom du produit
+			$pdf->SetFont(pdf_getPDFFont($outputlangs), '', 7);
+			if($i % 2 == 0){$pdf->SetFillColor(212, 212, 212);}else{$pdf->SetFillColor(255, 255, 255);}
 			$pdf->Cell($this->page_largeur - $this->marge_gauche - $this->marge_droite, 5, $nameproduit.' '.$price, 0, 2, 'L', 1); // Product name
 
 			// Description
