@@ -634,7 +634,7 @@ class pdf_catalog
 			$pdf->SetFont(pdf_getPDFFont($outputlangs), '', 9);
 			if($i % 2 == 0){$pdf->SetFillColor(212, 212, 212);}else{$pdf->SetFillColor(255, 255, 255);}
 			$pdf->Cell($this->page_largeur - $this->marge_gauche - $this->marge_droite, 2, $nameproduit, 0, 2, 'L', 1);
-			$pdf->Cell($this->page_largeur - $this->marge_gauche - $this->marge_droite, 2, $price, 0, 2, 'R', 1); // Product name
+			$pdf->Cell($this->page_largeur - $this->marge_gauche - $this->marge_droite, 2, $price, 0, 0, 'R', 0); // Product name
             $pdf->SetY($y_axe + $interligne + 8);
             $pdf->SetX($x_axe);
 
