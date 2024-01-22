@@ -620,12 +620,11 @@ class pdf_catalog
             }
 
             // Ref product + Label
-            $pdf->SetY($y_axe + $interligne + 8); // On se positionne 8 mm sous la précédente rubrique
-
-            $nexY = $y_axe + $interligne + 8;
+            $pdf->SetY($y_axe + $interligne + 6); // On se positionne 8 mm sous la précédente rubrique
 
             $posproperties = 160;
             $maxwidth = 40;			// Max width of images
+
             if ($this->page_largeur < 210) // To work with US executive format
             {
             	$posproperties-=10;
@@ -634,13 +633,7 @@ class pdf_catalog
 
 			$pdf->SetFont(pdf_getPDFFont($outputlangs), '', 7);
 			if($i % 2 == 0){$pdf->SetFillColor(212, 212, 212);}else{$pdf->SetFillColor(255, 255, 255);}
-			$pdf->Cell($this->page_largeur - $this->marge_gauche - $this->marge_droite, 5, $nameproduit.' '.$price, 0, 2, 'L', 1); // Product name
-
-			// Description
-			$pos_y = $y_axe + $interligne + 16;
-			$pos_x = $x_axe + $maxwidth + 5;
-
-            $deltay = 6;
+			$pdf->Cell($this->page_largeur - $this->marge_gauche - $this->marge_droite, 0, $nameproduit.' '.$price, 0, 2, 'L', 1); // Product name
 
             $pdf->SetY($y_axe + $interligne + 16); //On se décalle de 16 mm sous le nom du produit
             $pdf->SetX($x_axe); // On se positionne à $x_axe
