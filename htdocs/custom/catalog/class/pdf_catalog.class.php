@@ -635,7 +635,7 @@ class pdf_catalog
 			if($i % 2 == 0){$pdf->SetFillColor(212, 212, 212);}else{$pdf->SetFillColor(255, 255, 255);}
 			$pdf->Cell($this->page_largeur - $this->marge_gauche - $this->marge_droite, 0, $nameproduit.' '.$price, 0, 2, 'L', 1); // Product name
 
-            $pdf->SetY($y_axe + $interligne + 16); //On se décalle de 16 mm sous le nom du produit
+            $pdf->SetY($y_axe + $interligne + 8); //On se décalle de 16 mm sous le nom du produit
             $pdf->SetX($x_axe); // On se positionne à $x_axe
 
             /*include_once DOL_DOCUMENT_ROOT . '/core/lib/images.lib.php';
