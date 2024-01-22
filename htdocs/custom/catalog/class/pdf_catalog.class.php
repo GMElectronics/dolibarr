@@ -561,7 +561,7 @@ class pdf_catalog
 					$pdf->Image($logo, $absx, 40, 0, $heightlogo);
 				}
 
-				$pdf->SetY(15);
+				$pdf->SetY(40);
 				$pdf->SetX($this->marge_gauche);
 				$pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, $cat_label, 0, 'L');
 
