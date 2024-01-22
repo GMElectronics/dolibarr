@@ -542,6 +542,7 @@ class pdf_catalog
 		{
 			if ($cat_label != $cat[$lines[$j][23]]->label)
 			{
+				$pdf->AddPage();
 				$pdf->SetFont(pdf_getPDFFont($outputlangs), '', 20);
 				$pdf->SetX(180);
 				$cat_label = $cat[$lines[$j][23]]->label;
@@ -576,7 +577,7 @@ class pdf_catalog
 				$interligne = 0;
 
 				$this->_pagefoot($pdf, $page, $outputlangs);
-				$pdf->AddPage();
+
 				$pdf->SetFont(pdf_getPDFFont($outputlangs), '', 12);
 				$page++;
 			}
