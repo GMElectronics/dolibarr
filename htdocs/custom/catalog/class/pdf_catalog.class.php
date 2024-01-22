@@ -576,7 +576,9 @@ class pdf_catalog
 				$interligne = 0;
 
 				$this->_pagefoot($pdf, $page, $outputlangs);
+				$pdf->AddPage();
 				$pdf->SetFont(pdf_getPDFFont($outputlangs), '', 12);
+				$page++;
 			}
 
             if ($i == $max)  // On vérifie si on a atteint le nombre de produit max par page
