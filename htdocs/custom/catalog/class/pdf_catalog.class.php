@@ -655,7 +655,7 @@ class pdf_catalog
             //$pdf->Image($image,$x_axe,$y_axe+$interligne+16,21,21);
 
             if ($this->page_hauteur < 297) $interligne = $interligne;
-            else $interligne = $interligne + 1;
+            else $interligne = $interligne + 4;
 
             $i++;
 
