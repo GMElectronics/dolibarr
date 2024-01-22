@@ -199,7 +199,7 @@ class pdf_catalog
         $sql .= "c.fk_categorie,";
 		$sql .= "p.label ASC";
 		$sql.= $this->db->plimit($search_maxnb);
-
+echo $sql;
         dol_syslog(get_class($this) . "::write_file sql=" . $sql);
         $result = $this->db->query($sql);
 
@@ -339,22 +339,17 @@ class pdf_catalog
         $pdf->SetX($this->marge_gauche);
         $sd = $pdf->getCellPaddings();
         $pdf->SetCellPaddings(10, 15, 0, 15);
-        //$pdf->Cell(120,40,$title,1,2,'C',0); // On dessine une cellule avec le titre du catalogue
         $pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, $title, 1, 'C');
-        //$pdf->writeHTMLCell(130, 0, 40 , 120, $title, 1, 1,0,1,'C',1);
         $pdf->SetCellPaddings($sd['L'], $sd['T'], $sd['R'], $sd['B']);
-        // New page
-        //$pdf->AddPage();
+
         if (!$conf->global->CAT_GROUP_BY_CATEGORY)
 		{
             $this->_pagefoot($pdf, 1, $outputlangs);
 			$pdf->AddPage();
 		}
 
-        //$this->_pagehead($pdf);
         $this->Body($pdf, $lines, $outputlangs, $footer, $divise);
 
-        //$pdf->AliasNbPages();
         if ($pdf_input !== null && $position == 1) {
             $this->add_pdf($pdf, $pdf_input);
         }
