@@ -597,12 +597,6 @@ class pdf_catalog
                 $this->_pagehead($pdf, $page);
             }
 
-            $description = $lines[$j][21];  // description courte
-
-            if (dol_textishtml($description)) $description = preg_replace('/__N__/', '<br>', $description);
-            else $description = preg_replace('/__N__/', "\n", $description);
-            $description = dol_htmlentitiesbr($description, 1);
-
 			/*
 			 * PRICE
 			 */
@@ -647,7 +641,6 @@ class pdf_catalog
 			// Description
 			$pos_y = $y_axe + $interligne + 16;
 			$pos_x = $x_axe + $maxwidth + 5;
-			$pdf->writeHTMLCell(($posproperties - $pos_x - 2), 5, $pos_x, $pos_y, $description, 0, 1);
 
             $deltay = 8;
 
