@@ -433,7 +433,7 @@ class pdf_catalog
     {
         if ($page > 1) // Si on est pas sur la première page
         {
-            $pdf->SetY(260);
+            $pdf->SetY(250);
             $pdf->SetFont(pdf_getPDFFont($outputlangs), 'I', 8);
 
             //Num page
