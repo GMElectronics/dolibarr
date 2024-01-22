@@ -123,7 +123,6 @@ class pdf_catalog
             $file = $dir . "/catalog_products-" . dol_print_date(dol_mktime(0, 0, 0, $this->month, $this->day, $this->year), "dayrfc", false, $outputlangs, true) . ($catlevel > 0 ? "-" . $catlevel : "") . (count($catarray)?"":"-all") . ".pdf";
         }
 
-        //$num=0;
         $lines = array();
         $sql = "SELECT DISTINCT p.rowid, p.ref";
         if ($catlevel > 0) {
@@ -135,15 +134,8 @@ class pdf_catalog
         $sql .= ", p.tva_tx, p.tosell, p.fk_product_type, p.duration";
         $sql .= ", p.weight, p.weight_units, p.length, p.length_units";
         $sql .= ", p.surface, p.surface_units, volume, p.volume_units";
-
-
         $sql .= ", p.label, p.description, p.fk_country, p.stock";
-        if ($conf->global->CAT_GROUP_BY_CATEGORY) {
-            $sql .= ", c.fk_categorie";
-        }
-		if ($conf->global->CAT_GROUP_BY_SUPPLIER) {
-			$sql .= ", pfp.fk_soc, s.nom";
-		}
+		$sql .= ", c.fk_categorie";
         $sql .= " FROM  " . MAIN_DB_PREFIX . "product as p";
         $sql .= " LEFT JOIN " . MAIN_DB_PREFIX . "categorie_product as c on c.fk_product = p.rowid ";
 		$sql .= " LEFT JOIN " . MAIN_DB_PREFIX . "product_fournisseur_price as pfp on pfp.fk_product = p.rowid ";
@@ -152,13 +144,6 @@ class pdf_catalog
             $sql .= " LEFT JOIN " . MAIN_DB_PREFIX . "product_price as pp on pp.fk_product=p.rowid AND pp.price_level = " . $catlevel;
         }
         $sql .= " WHERE p.fk_product_type =" . $type;
-
-        if ($conf->global->CAT_SHOW_NO_SELL) {
-            $sql .= " AND p.tosell=1";
-        }
-        if ($conf->global->CAT_SHOW_NO_STOCK && ($type == 0 || $conf->global->STOCK_SUPPORTS_SERVICES)) {
-            $sql .= " AND p.stock > 0";
-        }
         $sql .= " AND p.entity IN (" . getEntity('product', 1) . ")";
         if ($search_ref) $sql.=natural_search('p.ref', $search_ref);
 		if (!empty($socid)) {
@@ -209,12 +194,16 @@ class pdf_catalog
 
         dol_syslog(get_class($this) . "::write_file sql=" . $sql);
         $result = $this->db->query($sql);
-        if ($result) {
+
+		if ($result)
+		{
             $num = $this->db->num_rows($result);
             $i = 0;
             $var = True;
             $objProd = new Product($db);
-            while ($i < $num) {
+
+            while ($i < $num)
+			{
                 unset($realpath);
 
                 $objp = $this->db->fetch_object($result);
@@ -227,10 +216,13 @@ class pdf_catalog
                     $pdir[0] = dol_sanitizeFileName($objp->ref) . '/';
                     $pdir[1] = get_exdir($objp->rowid, 2, 0, 0, $objProd, 'product') . $objp->rowid . "/photos/";
                 }
+
                 $arephoto = false;
                 $realpath = "";
-                foreach ($pdir as $midir) {
-                    if (!$arephoto) {
+                foreach ($pdir as $midir)
+				{
+                    if (!$arephoto)
+					{
                         $dir = $conf->product->dir_output . '/' . $midir;
 
                         foreach ($objProd->liste_photos($dir, 1) as $key => $obj) {
@@ -249,10 +241,13 @@ class pdf_catalog
                         }
                     }
                 }
-                if($type==1){
+
+                if($type==1)
+				{
 					$objp->weight = null;
 					$objp->volume = null;
 				}
+
                 $lines[$i][0] = $realpath;
                 $lines[$i][1] = $objp->ref;
                 $lines[$i][2] = $objp->price;
@@ -273,6 +268,7 @@ class pdf_catalog
                 $lines[$i][17] = $objp->volume;
                 $lines[$i][18] = $objp->volume_units;
                 $lines[$i][19] = $objp->lang;
+
                 if (!empty($objp->label_lang))
                     $lines[$i][20] = $objp->label_lang;
                 else
