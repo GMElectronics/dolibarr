@@ -138,8 +138,8 @@ class pdf_catalog
 		$sql .= ", c.fk_categorie";
         $sql .= " FROM  " . MAIN_DB_PREFIX . "product as p";
         $sql .= " LEFT JOIN " . MAIN_DB_PREFIX . "categorie_product as c on c.fk_product = p.rowid ";
-		$sql .= " LEFT JOIN " . MAIN_DB_PREFIX . "crm_categorie on crm_categorie.rowid = c.fk_categorie";
-		$sql .= " LEFT JOIN " . MAIN_DB_PREFIX . "crm_categorie as crm_categorie_parent ON crm_categorie_parent.rowid = crm_categorie.fk_parent";
+		$sql .= " LEFT JOIN " . MAIN_DB_PREFIX . "categorie as categorie on categorie.rowid = c.fk_categorie";
+		$sql .= " LEFT JOIN " . MAIN_DB_PREFIX . "categorie as categorie_parent ON categorie_parent.rowid = categorie.fk_parent";
 		$sql .= " LEFT JOIN " . MAIN_DB_PREFIX . "product_fournisseur_price as pfp on pfp.fk_product = p.rowid ";
 		$sql .= " LEFT JOIN " . MAIN_DB_PREFIX . "societe as s on s.rowid = pfp.fk_soc AND s.fournisseur = 1";
         if ($catlevel > 0) {
@@ -197,7 +197,7 @@ class pdf_catalog
         $sql .= ", p.label, p.description, p.fk_country, p.stock";
         $sql .= ', s.nom';
 		$sql .= ", c.fk_categorie";
-        $sql .= " ORDER BY crm_categorie_parent.rowid, crm_categorie.label, p.label ASC";
+        $sql .= " ORDER BY categorie_parent.rowid, categorie.label, p.label ASC";
 		$sql.= $this->db->plimit($search_maxnb);
 
         dol_syslog(get_class($this) . "::write_file sql=" . $sql);
