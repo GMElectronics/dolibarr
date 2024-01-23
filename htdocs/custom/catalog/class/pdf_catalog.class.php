@@ -449,7 +449,7 @@ class pdf_catalog
 
 
             $pdf->SetX($this->page_largeur - $this->marge_droite - 20);
-            $pdf->Cell(30, 10, $outputlangs->convToOutputCharset($strpage), 0, 1, 'C');
+            $pdf->Cell(0, 0, $outputlangs->convToOutputCharset($strpage), 0, 1, 'C');
 
 			$pdf->SetY(280);
 			$pdf->Cell(0, 0, 'G.M.Electronics - BE0426.751.795 - www.gmelectronics.be - Avenue Vésale, 23 1300 Wavre - 010/77.90.66', 0, 1, 'C');
