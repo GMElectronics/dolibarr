@@ -584,6 +584,7 @@ class pdf_catalog
 				}
 
 				$cat_color_cnt++;
+				$cat_color = $lines[$j][29];
 			}
 
 			if ($cat_label != $cat[$lines[$j][23]]->label)
