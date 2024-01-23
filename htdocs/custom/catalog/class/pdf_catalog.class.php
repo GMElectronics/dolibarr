@@ -401,8 +401,6 @@ class pdf_catalog
 				$height = 290;
 				$width = 210;
 				include_once DOL_DOCUMENT_ROOT . '/core/lib/images.lib.php';
-				$pdf->setPrintHeader(false);
-				$pdf->SetPrintFooter(false);
 				$pdf->SetMargins(0, 0, 0);
 				$pdf->SetAutoPageBreak(false, 0);
 				$pdf->Image($cover, 0, 0, $width, $height);
@@ -414,8 +412,6 @@ class pdf_catalog
 			$pdf->setXY($this->marge_gauche, $this->marge_haute);
 			$pdf->SetMargins($this->marge_gauche, $this->marge_haute, $this->marge_droite);
 			$pdf->SetAutoPageBreak(true, 0);
-			$pdf->setPrintHeader(false);
-			$pdf->SetPrintFooter(false);
 
 			if (is_readable($logo) && !empty($mysoc->logo))
 			{
@@ -442,21 +438,19 @@ class pdf_catalog
     {
         if ($page > 1) // Si on est pas sur la première page
         {
-            $pdf->SetY(250);
+            $pdf->SetY(260);
             $pdf->SetFont(pdf_getPDFFont($outputlangs), 'I', 8);
+			$pdf->SetMargins(0, 0, 0);
+			$pdf->SetAutoPageBreak(false, 0);
 
-            //Num page
-   			if (strtolower(pdf_getPDFFont($outputlangs)) == 'helvetica')
-			{
-				if (empty($conf->global->MAIN_USE_FPDF)) $strpage = $outputlangs->transnoentities("Page")." ".$pdf->PageNo().'/'.$pdf->getAliasNbPages();
-				else $strpage = $outputlangs->transnoentities("Page")." ".$pdf->PageNo().'/{nb}';
-			}
-			else
-			{
-				$strpage = $outputlangs->transnoentities("Page")." ".$page;
-			}
+			if (empty($conf->global->MAIN_USE_FPDF)) $strpage = $outputlangs->transnoentities("Page")." ".$pdf->PageNo().'/'.$pdf->getAliasNbPages();
+			else $strpage = $outputlangs->transnoentities("Page")." ".$pdf->PageNo().'/{nb}';
+
             $pdf->SetX($this->page_largeur - $this->marge_droite - 20);
             $pdf->Cell(30, 10, $outputlangs->convToOutputCharset($strpage), 0, 1, 'C');
+
+			$pdf->SetMargins($this->marge_gauche, $this->marge_haute, $this->marge_droite);
+			$pdf->SetAutoPageBreak(true, 0);
         }
     }
 
