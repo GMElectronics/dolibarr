@@ -413,7 +413,7 @@ class pdf_catalog
 			if (is_readable($logo) && !empty($mysoc->logo))
 			{
 				$height = pdf_getHeightForLogo($logo);
-				$maxheight = 40;
+				$maxheight = 15;
 
 				if ($height > $maxheight)
 				{
