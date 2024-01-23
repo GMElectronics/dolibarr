@@ -569,8 +569,8 @@ class pdf_catalog
 				$pdf->AddPage();
 
 				$catPicture = $conf->mycompany->dir_output . '/categories/' . $catPictures[$cat_color_cnt];
-				echo $catPicture;
-				print_r($catPictures);
+				echo $catPicture.'</br>';
+				print_r($catPictures).'</br>';
 				$pdf->setXY(0, 0);
 
 				if (is_readable($catPicture))
