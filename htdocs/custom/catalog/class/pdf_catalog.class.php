@@ -570,6 +570,7 @@ class pdf_catalog
 
 				$catPicture = $conf->mycompany->dir_output . '/categories/' . $catPictures[$cat_color_cnt];
 				echo $catPicture;
+				print_r($catPictures);
 				$pdf->setXY(0, 0);
 
 				if (is_readable($catPicture))
