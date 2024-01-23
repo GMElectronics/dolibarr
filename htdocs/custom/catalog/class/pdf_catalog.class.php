@@ -573,10 +573,10 @@ class pdf_catalog
 				$pdf->SetX($this->marge_gauche);
 				$pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, $cat_label, 0, 'L');
 
+				$pdf->SetFont(pdf_getPDFFont($outputlangs), '', 9);
 				$pdf->SetY(43);
 				$pdf->SetX($this->marge_gauche);
 				$pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, $lines[$j][28], 0, 'L');
-
 
 				$this->myfoot($pdf, $page, $outputlangs, $footer);
 				$this->_pagehead($pdf, $page);
