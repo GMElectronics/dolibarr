@@ -331,7 +331,7 @@ class pdf_catalog
 
         $this->_pagehead($pdf, 1);
 
-		$pdf->SetTextColor(177, 220, 97);
+		$pdf->SetTextColor(146, 208, 80);
         $pdf->SetY(230);
         $pdf->SetX(110);
 		$sd = $pdf->getCellPaddings();
@@ -347,7 +347,7 @@ class pdf_catalog
 
 		$pdf->SetCellPaddings($sd['L'], $sd['T'], $sd['R'], $sd['B']);
 
-		$pdf->SetTextColor(10, 10, 10);
+		$pdf->SetTextColor(20, 20, 20);
 
         if (!$conf->global->CAT_GROUP_BY_CATEGORY)
 		{
@@ -414,8 +414,8 @@ class pdf_catalog
 			$pdf->setXY($this->marge_gauche, $this->marge_haute);
 			$pdf->SetMargins($this->marge_gauche, $this->marge_haute, $this->marge_droite);
 			$pdf->SetAutoPageBreak(true, 0);
-			$pdf->setPrintHeader(true);
-			$pdf->SetPrintFooter(true);
+			$pdf->setPrintHeader(false);
+			$pdf->SetPrintFooter(false);
 
 			if (is_readable($logo) && !empty($mysoc->logo))
 			{
