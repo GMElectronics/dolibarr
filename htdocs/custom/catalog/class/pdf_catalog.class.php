@@ -383,7 +383,7 @@ class pdf_catalog
      */
     public function _pagehead(&$pdf, $page)
     {
-        global $conf;
+        global $conf, $mysoc;
 		if ($page == 1)
 		{
 			$cover = $conf->mycompany->dir_output . '/cover/Cover.jpg';
@@ -392,20 +392,9 @@ class pdf_catalog
 			if (is_readable($cover))
 			{
 				$height = 290;
-				$maxwidth = 210;
+				$width = 210;
 				include_once DOL_DOCUMENT_ROOT . '/core/lib/images.lib.php';
-				$tmp = dol_getImageSize($cover);
-
-				if ($tmp['height']) {
-					$width = $height * $tmp['width'] / $tmp['height'];
-					if ($width > $maxwidth) {
-						$height = $height * $maxwidth / $width;
-						$width = $maxwidth;
-					}
-				}
-
-				$absx = ($this->page_largeur - $width) / 2;
-				$pdf->Image($cover, $absx, 40, 0, $height);
+				$pdf->Image($cover, 0, 0, $width, $height);
 			}
 		}
 		else
