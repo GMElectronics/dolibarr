@@ -561,11 +561,11 @@ class pdf_catalog
 					$pdf->Image($logo, $absx, 40, 0, $heightlogo);
 				}
 
-				$pdf->SetY(40);
+				$pdf->SetY(43);
 				$pdf->SetX($this->marge_gauche);
 				$pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, $cat_label, 0, 'L');
 
-				$pdf->SetFont(pdf_getPDFFont($outputlangs), '', 12);
+				$pdf->SetFont(pdf_getPDFFont($outputlangs), 'B', 11);
 				$this->myfoot($pdf, $page, $outputlangs, $footer);
 				$this->_pagehead($pdf, $page);
 
@@ -619,7 +619,7 @@ class pdf_catalog
             }
 
             // Ref product + Label
-            $pdf->SetY($y_axe + $interligne + 6); // On se positionne 8 mm sous la précédente rubrique
+            $pdf->SetY($y_axe + $interligne + 7); // On se positionne 8 mm sous la précédente rubrique
 
             $posproperties = 160;
             $maxwidth = 40;			// Max width of images
@@ -637,7 +637,7 @@ class pdf_catalog
 			$pdf->Cell($this->page_largeur - $this->marge_gauche - $this->marge_droite, 7, $ref, $line, 0, 'L', 1);
 			$pdf->SetX(50);
 			$pdf->Cell($this->page_largeur - $this->marge_gauche - $this->marge_droite, 7, $label, 0, 0, 'L', 0);
-			$pdf->SetX(20);
+			$pdf->SetX(5);
 			$pdf->Cell($this->page_largeur - $this->marge_gauche - $this->marge_droite, 7, $price, 0, 0, 'R', 0);
 			$pdf->SetX(0);
 			$pdf->SetY($y_axe + $interligne + 7);
