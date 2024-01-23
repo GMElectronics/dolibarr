@@ -37,6 +37,19 @@ require_once(DOL_DOCUMENT_ROOT."/categories/class/categorie.class.php");
 class pdf_catalog
 {
 	var $db;
+
+	var $catPictures =
+	[
+		'chaleur.jpg',
+		'eau.jpg',
+		'electricite.jpg',
+		'fuel.jpg',
+		'gaz.jpg',
+		'capteurs.jpg',
+		'passerelles.jpg',
+		'convertisseurs.jpg',
+	];
+
     /**
      * @brief  Constructeur
      * @param handler $db
@@ -135,7 +148,7 @@ class pdf_catalog
         $sql .= ", p.weight, p.weight_units, p.length, p.length_units";
         $sql .= ", p.surface, p.surface_units, volume, p.volume_units";
         $sql .= ", p.label, p.description, p.fk_country, p.stock";
-		$sql .= ", c.fk_categorie, categorie.description";
+		$sql .= ", c.fk_categorie, categorie.description, categorie.color";
         $sql .= " FROM  " . MAIN_DB_PREFIX . "product as p";
         $sql .= " LEFT JOIN " . MAIN_DB_PREFIX . "categorie_product as c on c.fk_product = p.rowid ";
 		$sql .= " LEFT JOIN " . MAIN_DB_PREFIX . "categorie as categorie on categorie.rowid = c.fk_categorie";
@@ -304,6 +317,7 @@ class pdf_catalog
                 }
 
 				$lines[$i][28] = $objp->description;
+				$lines[$i][29] = $objp->color;
 
                 $i++;
             }
@@ -509,7 +523,7 @@ class pdf_catalog
      */
     public function Body(&$pdf, $lines, $outputlangs, $footer, $divise=0)
     {
-        global $conf, $db, $langs;
+        global $db, $conf, $catPictures;
 
 		$default_font_size = pdf_getPDFFontSize($outputlangs);	// Must be after pdf_getInstance
         $pdf->SetFont(pdf_getPDFFont($outputlangs), '', $default_font_size);
@@ -545,9 +559,33 @@ class pdf_catalog
 		 */
 
         $cat_label = null;
+		$cat_color = null;
+		$cat_color_cnt = 0;
         $prov_label = null;
         for ($j = 0; $j < $numlines; $j++)
 		{
+			if($cat_color != $lines[$j][29])
+			{
+				$pdf->AddPage();
+
+				$catPicture = $conf->mycompany->dir_output . '/categories/' . $catPictures[$cat_color_cnt];
+				$pdf->setXY(0, 0);
+
+				if (is_readable($catPicture))
+				{
+					$height = 290;
+					$width = 210;
+					include_once DOL_DOCUMENT_ROOT . '/core/lib/images.lib.php';
+					$pdf->SetMargins(0, 0, 0);
+					$pdf->SetAutoPageBreak(false, 0);
+					$pdf->Image($catPicture, 0, 0, $width, $height);
+					$pdf->SetMargins($this->marge_gauche, $this->marge_haute, $this->marge_droite);
+					$pdf->SetAutoPageBreak(true, 0);
+				}
+
+				$cat_color_cnt++;
+			}
+
 			if ($cat_label != $cat[$lines[$j][23]]->label)
 			{
 				$pdf->AddPage();
