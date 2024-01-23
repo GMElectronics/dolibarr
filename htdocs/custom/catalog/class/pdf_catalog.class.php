@@ -420,7 +420,7 @@ class pdf_catalog
 					$height = $maxheight;
 				}
 
-				$pdf->Image($logo, 10, 8, 0, $height);
+				$pdf->Image($logo, 150, 12, 0, $height);
 			}
 		}
     }
