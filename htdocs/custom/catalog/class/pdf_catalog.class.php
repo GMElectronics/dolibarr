@@ -394,6 +394,8 @@ class pdf_catalog
 				$height = 290;
 				$width = 210;
 				include_once DOL_DOCUMENT_ROOT . '/core/lib/images.lib.php';
+				$pdf->setPrintHeader(false);
+				$pdf->SetPrintFooter(false);
 				$pdf->SetMargins(0, 0, 0);
 				$pdf->Image($cover, 0, 0, $width, $height);
 			}
@@ -403,6 +405,8 @@ class pdf_catalog
 			$logo = $conf->mycompany->dir_output . '/logos/' . $mysoc->logo;
 			$pdf->setXY($this->marge_gauche, $this->marge_haute);
 			$pdf->SetMargins($this->marge_gauche, $this->marge_haute, $this->marge_droite);
+			$pdf->setPrintHeader(true);
+			$pdf->SetPrintFooter(true);
 
 			if (is_readable($logo) && !empty($mysoc->logo))
 			{
