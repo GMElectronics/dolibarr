@@ -336,15 +336,15 @@ class pdf_catalog
         $pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, 'CATALOGUE PRODUITS', 0, 'L');
 
 		$pdf->SetFont(pdf_getPDFFont($outputlangs), '', 14);
-		$pdf->SetTextColor(50, 50, 50);
+		$pdf->SetTextColor(70, 70, 70);
 		$title = dol_print_date(dol_mktime(0, 0, 0, $this->month, $this->day, $this->year), "daytext", false, $outputlangs, true);
 
-		$pdf->SetY(240);
+		$pdf->SetY(238);
 		$pdf->SetX(110);
 		$pdf->SetCellPaddings(10, 15, 0, 15);
 		$pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, $title, 0, 'L');
 
-		$pdf->SetY(247);
+		$pdf->SetY(246);
 		$pdf->SetX(110);
 		$pdf->SetCellPaddings(10, 15, 0, 15);
 		$pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, 'Prix public', 0, 'L');
@@ -444,6 +444,7 @@ class pdf_catalog
         {
             $pdf->SetY(280);
             $pdf->SetFont(pdf_getPDFFont($outputlangs), '', 8);
+			$pdf->SetTextColor(20, 20, 20);
 			$pdf->SetMargins(0, 0, 0);
 			$pdf->SetAutoPageBreak(false, 0);
 
@@ -451,8 +452,6 @@ class pdf_catalog
 
             $pdf->SetX($this->page_largeur - $this->marge_droite - 20);
             $pdf->Cell(30, 0, $outputlangs->convToOutputCharset($strpage), 0, 1, 'C');
-
-			$pdf->SetTextColor(20, 20, 20);
 			$pdf->SetY(280);
 			$pdf->Cell(0, 0, 'G.M.Electronics - BE0426.751.795 - www.gmelectronics.be - Avenue Vésale, 23 1300 Wavre - 010/77.90.66', 0, 1, 'C');
 
