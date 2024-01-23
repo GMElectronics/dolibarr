@@ -321,7 +321,7 @@ class pdf_catalog
 
         $pdf->AddFont('helvetica', '', 'helvetica.php'); // On ajoute la police helvetica
         $pdf->AddPage();      // On ajoute une page. La première
-        $pdf->SetFont(pdf_getPDFFont($outputlangs), '', 24); // On sélectionne la police helvetica de taille 24
+        $pdf->SetFont(pdf_getPDFFont($outputlangs), '', 20);
 
 		$pdf->SetMargins($this->marge_gauche, $this->marge_haute, $this->marge_droite);   // Left, Top, Right
 		$pdf->setPageOrientation('', 1, $this->marge_basse + 8 + 12);	// The only function to edit the bottom margin of current page to set it.
@@ -335,7 +335,7 @@ class pdf_catalog
 
         $this->_pagehead($pdf, 1);
 
-        $pdf->SetY(120); // On se positionne à Y=100
+        $pdf->SetY(200);
         $pdf->SetX($this->marge_gauche);
         $sd = $pdf->getCellPaddings();
         $pdf->SetCellPaddings(10, 15, 0, 15);
@@ -420,7 +420,7 @@ class pdf_catalog
 					$height = $maxheight;
 				}
 
-				$pdf->Image($logo, 150, 12, 0, $height);
+				$pdf->Image($logo, 155, 12, 0, $height);
 			}
 		}
     }
@@ -457,9 +457,8 @@ class pdf_catalog
     {
         if ($page > 1) // Si on est pas sur la première page
         {
-            if ($footer) {
-				$heightforfooter = 10;
-
+            if ($footer)
+			{
 				$pdf->SetFont(pdf_getPDFFont($outputlangs), '', 8);
 				$pdf->setPageOrientation('', 1, 0);	// The only function to edit the bottom margin of current page to set it.
 
