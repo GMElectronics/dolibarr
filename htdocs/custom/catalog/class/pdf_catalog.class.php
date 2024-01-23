@@ -630,11 +630,12 @@ class pdf_catalog
             	$maxwidth = 35;
             }
 
+			$label = (strlen($label) > 50) ? substr($label, 0, 50).'...' : $label;
 			$pdf->SetFont(pdf_getPDFFont($outputlangs), '', 9);
 			if($i % 2 == 0){$pdf->SetFillColor(246, 246, 246);}else{$pdf->SetFillColor(255, 255, 255);}
 			$pdf->Cell($this->page_largeur - $this->marge_gauche - $this->marge_droite, 4, $ref, 0, 0, 'L', 1);
-			$pdf->SetX(40);
-			$pdf->Cell($this->page_largeur - $this->marge_gauche - $this->marge_droite, 4, $label, 0, 0, 'L', 1);
+			$pdf->SetX(50);
+			$pdf->Cell($this->page_largeur - $this->marge_gauche - $this->marge_droite, 4, $label, 0, 0, 'L', 0);
 			$pdf->SetX(0);
 			$pdf->Cell($this->page_largeur - $this->marge_gauche - $this->marge_droite, 4, $price, 0, 0, 'R', 0);
 
