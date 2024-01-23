@@ -17,6 +17,13 @@
  * or see http://www.gnu.org/
  */
 
+/********************************************************
+ * G.M.ELECTRONICS
+ * REMEMBER THAT ALL GLOBAL CATEGORIES ARE LINKED TO THE COLOR
+ * CONFIGURED INTO DOLIBARR. IT MEANS THAT "HEAT" CATEGORY NEEDS
+ * TO HAVE ITS ACCESSORIES, METERS, ETC. IN THE SAME COLOR !
+ */
+
 /**
  *	\file       htdocs/catalog/class/pdf_catalog.class.php
  *	\ingroup    product
@@ -48,6 +55,18 @@ class pdf_catalog
 		'capteurs.jpg',
 		'passerelles.jpg',
 		'convertisseurs.jpg',
+	];
+
+	var $catDescription =
+	[
+		'Chaleur',
+		'Eau',
+		'Electricité',
+		'Mazout',
+		'Gaz',
+		'Capteurs',
+		'Passerelles',
+		'Convertisseurs',
 	];
 
     /**
@@ -575,7 +594,7 @@ class pdf_catalog
 
 				if (is_readable($catPicture))
 				{
-					$height = 290;
+					$height = 300;
 					$width = 210;
 					include_once DOL_DOCUMENT_ROOT . '/core/lib/images.lib.php';
 					$pdf->SetMargins(0, 0, 0);
@@ -584,6 +603,12 @@ class pdf_catalog
 					$pdf->SetMargins($this->marge_gauche, $this->marge_haute, $this->marge_droite);
 					$pdf->SetAutoPageBreak(true, 0);
 				}
+
+				$pdf->SetFont(pdf_getPDFFont($outputlangs), '', 16);
+				$pdf->SetTextColor(255, 255, 255);
+				$pdf->SetY(155);
+				$pdf->SetX($this->marge_gauche + 80);
+				$pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, $this->catDescription[$cat_color_cnt], 0, 'R');
 
 				$cat_color_cnt++;
 				$cat_color = $lines[$j][29];
@@ -721,22 +746,6 @@ class pdf_catalog
 			$pdf->Cell($this->page_largeur - $this->marge_gauche - $this->marge_droite, 7, $price, 0, 0, 'R', 0);
 			$pdf->SetX(0);
 			$pdf->SetY($y_axe + $interligne + 7);
-            /*include_once DOL_DOCUMENT_ROOT . '/core/lib/images.lib.php';
-            $tmp = dol_getImageSize($image);
-            $tmp['height'] = $tmp['height'] * 0.265;
-            $tmp['width'] = $tmp['width'] * 0.265;
-            ($tmp['height'] < $height ? $height = $tmp['height'] : 0);
-            if ($tmp['height']) {
-                $width = $height * $tmp['width'] / $tmp['height'];
-                if ($width > $maxwidth) {
-                    $height = $height * $maxwidth / $width;
-                    $width = $maxwidth;
-                }
-            }*/
-
-            // $pdf->Image($image, $x_axe + $offsetximage, $y_axe + $interligne + 16, 0, $height);
-            //$pdf->Image($image,$x_axe,$y_axe+$interligne+16,21,21);
-
             if ($this->page_hauteur < 297) $interligne = $interligne;
             else $interligne = $interligne + 7;
 
