@@ -607,8 +607,10 @@ class pdf_catalog
 				$pdf->SetFont(pdf_getPDFFont($outputlangs), '', 16);
 				$pdf->SetTextColor(255, 255, 255);
 				$pdf->SetY(155);
-				$pdf->SetX($this->marge_gauche + 80);
-				$pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, $this->catDescription[$cat_color_cnt], 0, 'R');
+				$pdf->SetX($this->marge_gauche);
+				$pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, $this->catDescription[$cat_color_cnt], 0, 'L');
+
+				$pdf->SetTextColor(20, 20, 20);
 
 				$cat_color_cnt++;
 				$cat_color = $lines[$j][29];
