@@ -391,10 +391,14 @@ class pdf_catalog
 
 			if (is_readable($cover))
 			{
-				$height = 740;
-				$width = 500;
+				$height = 290;
+				$width = 210;
 				include_once DOL_DOCUMENT_ROOT . '/core/lib/images.lib.php';
-				$pdf->Image($cover, 0, 0, 0, 0);
+				$pdf->setPrintHeader(false);
+				$pdf->SetPrintFooter(false);
+				$pdf->SetMargins(0, 0, 0);
+				$pdf->SetAutoPageBreak(false, 0);
+				$pdf->Image($cover, 0, 0, $width, $height);
 			}
 		}
 		else
