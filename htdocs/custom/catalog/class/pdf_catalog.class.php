@@ -633,13 +633,13 @@ class pdf_catalog
 			$label = (strlen($label) > 50) ? substr($label, 0, 50).'...' : $label;
 			$pdf->SetFont(pdf_getPDFFont($outputlangs), '', 9);
 			if($i % 2 == 0){$pdf->SetFillColor(246, 246, 246);}else{$pdf->SetFillColor(255, 255, 255);}
-			$pdf->Cell($this->page_largeur - $this->marge_gauche - $this->marge_droite, 4, $ref, 0, 0, 'L', 1);
+			$pdf->Cell($this->page_largeur - $this->marge_gauche - $this->marge_droite, 8, $ref, 0, 0, 'L', 1);
 			$pdf->SetX(50);
-			$pdf->Cell($this->page_largeur - $this->marge_gauche - $this->marge_droite, 4, $label, 0, 0, 'L', 0);
+			$pdf->Cell($this->page_largeur - $this->marge_gauche - $this->marge_droite, 8, $label, 0, 0, 'L', 0);
 			$pdf->SetX(0);
-			$pdf->Cell($this->page_largeur - $this->marge_gauche - $this->marge_droite, 4, $price, 0, 0, 'R', 0);
+			$pdf->Cell($this->page_largeur - $this->marge_gauche - $this->marge_droite, 8, $price, 0, 0, 'R', 0);
 
-			$pdf->SetY($y_axe + $interligne + 6);
+			$pdf->SetY($y_axe + $interligne + 8);
             /*include_once DOL_DOCUMENT_ROOT . '/core/lib/images.lib.php';
             $tmp = dol_getImageSize($image);
             $tmp['height'] = $tmp['height'] * 0.265;
