@@ -326,24 +326,28 @@ class pdf_catalog
 		$pdf->SetMargins($this->marge_gauche, $this->marge_haute, $this->marge_droite);   // Left, Top, Right
 		$pdf->setPageOrientation('', 1, $this->marge_basse + 8 + 12);	// The only function to edit the bottom margin of current page to set it.
 
-        $title = $conf->global->CAT_TITLE;
-        if (empty($title)) {
-            $title = $outputlangs->transnoentities("Catalog".$type);
-            $title .= ' - ' . dol_print_date(dol_mktime(0, 0, 0, $this->month, $this->day, $this->year), "daytext", false, $outputlangs, true);
-            $title = strip_tags($title);
-        }
+		$title = $outputlangs->transnoentities("Catalog".$type);
+		$title = strip_tags($title);
 
         $this->_pagehead($pdf, 1);
 
-		$pdf->SetTextColor(187, 230, 107);
-        $pdf->SetY(240);
+		$pdf->SetTextColor(177, 220, 97);
+        $pdf->SetY(230);
         $pdf->SetX(100);
-        $sd = $pdf->getCellPaddings();
         $pdf->SetCellPaddings(10, 15, 0, 15);
         $pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, $title, 0, 'L');
-        $pdf->SetCellPaddings($sd['L'], $sd['T'], $sd['R'], $sd['B']);
 
-		$pdf->SetTextColor(0, 0, 0);
+		$title = dol_print_date(dol_mktime(0, 0, 0, $this->month, $this->day, $this->year), "daytext", false, $outputlangs, true);
+
+		$pdf->SetY(240);
+		$pdf->SetX(100);
+		$sd = $pdf->getCellPaddings();
+		$pdf->SetCellPaddings(10, 15, 0, 15);
+		$pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, $title, 0, 'L');
+
+		$pdf->SetCellPaddings($sd['L'], $sd['T'], $sd['R'], $sd['B']);
+
+		$pdf->SetTextColor(10, 10, 10);
 
         if (!$conf->global->CAT_GROUP_BY_CATEGORY)
 		{
