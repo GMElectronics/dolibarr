@@ -387,7 +387,7 @@ class pdf_catalog
 
 		$pdf->setXY($this->marge_gauche, $this->marge_haute);
         $logo = $conf->mycompany->dir_output . '/logos/' . $mysoc->logo;
-
+echo $logo;
         if (is_readable($logo) && !empty($mysoc->logo))
 		{
             if ($page != 1) 	// Logo on header
