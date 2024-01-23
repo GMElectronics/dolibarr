@@ -582,7 +582,7 @@ class pdf_catalog
 				$this->_pagehead($pdf, $page);
 
 				$i = 0;
-				$y_axe = $headerheight;
+				$y_axe = $headerheight + 3;
 				$interligne = 0;
 
 				$pdf->SetY($y_axe + $interligne + 7);
