@@ -405,6 +405,10 @@ class pdf_catalog
 		{
 			$logo = $conf->mycompany->dir_output . '/logos/' . $mysoc->logo;
 			$pdf->setXY($this->marge_gauche, $this->marge_haute);
+			$pdf->setPrintHeader(true);
+			$pdf->SetPrintFooter(true);
+			$pdf->SetMargins($this->marge_gauche, $this->marge_haute, $this->marge_droite);
+			$pdf->SetAutoPageBreak(true, 0);
 
 			if (is_readable($logo) && !empty($mysoc->logo))
 			{
