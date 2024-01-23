@@ -397,6 +397,7 @@ class pdf_catalog
 				$pdf->setPrintHeader(false);
 				$pdf->SetPrintFooter(false);
 				$pdf->SetMargins(0, 0, 0);
+				$pdf->SetAutoPageBreak(false, 0);
 				$pdf->Image($cover, 0, 0, $width, $height);
 			}
 		}
@@ -405,6 +406,7 @@ class pdf_catalog
 			$logo = $conf->mycompany->dir_output . '/logos/' . $mysoc->logo;
 			$pdf->setXY($this->marge_gauche, $this->marge_haute);
 			$pdf->SetMargins($this->marge_gauche, $this->marge_haute, $this->marge_droite);
+			$pdf->SetAutoPageBreak(true, 0);
 			$pdf->setPrintHeader(true);
 			$pdf->SetPrintFooter(true);
 
