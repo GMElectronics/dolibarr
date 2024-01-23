@@ -588,8 +588,6 @@ class pdf_catalog
 				$pdf->AddPage();
 
 				$catPicture = $conf->mycompany->dir_output . '/categories/' . $this->catPictures[$cat_color_cnt];
-				echo $catPicture.'</br>';
-				print_r($this->catPictures).'</br>';
 				$pdf->setXY(0, 0);
 
 				if (is_readable($catPicture))
@@ -607,8 +605,8 @@ class pdf_catalog
 				$pdf->SetFont(pdf_getPDFFont($outputlangs), '', 24);
 				$pdf->SetTextColor(255, 255, 255);
 				$pdf->SetY(255);
-				$pdf->SetX($this->marge_gauche +100);
-				$pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, $this->catDescription[$cat_color_cnt], 0, 'L');
+				$pdf->SetX($this->marge_gauche);
+				$pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, $this->catDescription[$cat_color_cnt], 0, 'R');
 
 				$pdf->SetTextColor(20, 20, 20);
 
