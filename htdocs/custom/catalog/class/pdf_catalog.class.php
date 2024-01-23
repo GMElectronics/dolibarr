@@ -59,14 +59,14 @@ class pdf_catalog
 
 	var $catDescription =
 	[
-		'Chaleur',
-		'Eau',
-		'Electricité',
-		'Mazout',
-		'Gaz',
-		'Capteurs',
-		'Passerelles',
-		'Convertisseurs',
+		'SECTION: CHALEUR',
+		'SECTION: EAU',
+		'SECTION: ELECTRICITE',
+		'SECTION: MAZOUT',
+		'SECTION: GAZ',
+		'SECTION: CAPTEURS',
+		'SECTION: PASSERELLES',
+		'SECTION: CONVERTISSEURS',
 	];
 
     /**
@@ -604,10 +604,10 @@ class pdf_catalog
 					$pdf->SetAutoPageBreak(true, 0);
 				}
 
-				$pdf->SetFont(pdf_getPDFFont($outputlangs), '', 16);
+				$pdf->SetFont(pdf_getPDFFont($outputlangs), '', 24);
 				$pdf->SetTextColor(255, 255, 255);
-				$pdf->SetY(155);
-				$pdf->SetX($this->marge_gauche);
+				$pdf->SetY(255);
+				$pdf->SetX($this->marge_gauche +100);
 				$pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, $this->catDescription[$cat_color_cnt], 0, 'L');
 
 				$pdf->SetTextColor(20, 20, 20);
