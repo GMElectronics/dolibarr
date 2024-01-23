@@ -335,13 +335,15 @@ class pdf_catalog
 
         $this->_pagehead($pdf, 1);
 
-		$pdf->SetTextColor(260);
-        $pdf->SetY(260);
-        $pdf->SetX(155);
+		$pdf->SetTextColor(187, 230, 107);
+        $pdf->SetY(240);
+        $pdf->SetX(100);
         $sd = $pdf->getCellPaddings();
         $pdf->SetCellPaddings(10, 15, 0, 15);
         $pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, $title, 0, 'L');
         $pdf->SetCellPaddings($sd['L'], $sd['T'], $sd['R'], $sd['B']);
+
+		$pdf->SetTextColor(0, 0, 0);
 
         if (!$conf->global->CAT_GROUP_BY_CATEGORY)
 		{
