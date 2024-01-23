@@ -335,7 +335,7 @@ class pdf_catalog
 
         $this->_pagehead($pdf, 1);
 
-		$pdf->SetTextColor((260);
+		$pdf->SetTextColor(260);
         $pdf->SetY(260);
         $pdf->SetX(155);
         $sd = $pdf->getCellPaddings();
