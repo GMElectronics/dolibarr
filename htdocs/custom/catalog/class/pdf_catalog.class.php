@@ -580,6 +580,7 @@ class pdf_catalog
 				$y_axe = $headerheight;
 				$interligne = 0;
 
+				$pdf->SetY($y_axe + $interligne + 7);
 				$pdf->SetFont(pdf_getPDFFont($outputlangs), 'B', 9);
 				$pdf->SetFillColor(246, 246, 246);
 				$pdf->Cell($this->page_largeur - $this->marge_gauche - $this->marge_droite, 7, 'Référence', 'T', 0, 'L', 1);
