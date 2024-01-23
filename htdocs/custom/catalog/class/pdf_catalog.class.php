@@ -326,9 +326,6 @@ class pdf_catalog
 		$pdf->SetMargins($this->marge_gauche, $this->marge_haute, $this->marge_droite);   // Left, Top, Right
 		$pdf->setPageOrientation('', 1, $this->marge_basse + 8 + 12);	// The only function to edit the bottom margin of current page to set it.
 
-		$title = $outputlangs->transnoentities("Catalog".$type);
-		$title = strip_tags($title);
-
         $this->_pagehead($pdf, 1);
 
 		$pdf->SetTextColor(146, 208, 80);
@@ -336,11 +333,13 @@ class pdf_catalog
         $pdf->SetX(110);
 		$sd = $pdf->getCellPaddings();
         $pdf->SetCellPaddings(10, 15, 0, 15);
-        $pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, $title, 0, 'L');
+        $pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, 'CATALOGUE PRODUITS', 0, 'L');
 
+		$pdf->SetFont(pdf_getPDFFont($outputlangs), '', 14);
+		$pdf->SetTextColor(20, 20, 20);
 		$title = dol_print_date(dol_mktime(0, 0, 0, $this->month, $this->day, $this->year), "daytext", false, $outputlangs, true);
 
-		$pdf->SetY(240);
+		$pdf->SetY(237);
 		$pdf->SetX(110);
 		$pdf->SetCellPaddings(10, 15, 0, 15);
 		$pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, $title, 0, 'L');
