@@ -391,8 +391,8 @@ class pdf_catalog
 
 			if (is_readable($cover))
 			{
-				$height = 290;
-				$width = 300;
+				$height = 340;
+				$width = 240;
 				include_once DOL_DOCUMENT_ROOT . '/core/lib/images.lib.php';
 				$pdf->Image($cover, 0, 0, $width, $height);
 			}
