@@ -523,7 +523,7 @@ class pdf_catalog
      */
     public function Body(&$pdf, $lines, $outputlangs, $footer, $divise=0)
     {
-        global $db, $conf, $catPictures;
+        global $db, $conf;
 
 		$default_font_size = pdf_getPDFFontSize($outputlangs);	// Must be after pdf_getInstance
         $pdf->SetFont(pdf_getPDFFont($outputlangs), '', $default_font_size);
@@ -568,9 +568,9 @@ class pdf_catalog
 			{
 				$pdf->AddPage();
 
-				$catPicture = $conf->mycompany->dir_output . '/categories/' . $catPictures[$cat_color_cnt];
+				$catPicture = $conf->mycompany->dir_output . '/categories/' . $this->catPictures[$cat_color_cnt];
 				echo $catPicture.'</br>';
-				print_r($catPictures).'</br>';
+				print_r($this->catPictures).'</br>';
 				$pdf->setXY(0, 0);
 
 				if (is_readable($catPicture))
