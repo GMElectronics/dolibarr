@@ -336,15 +336,15 @@ class pdf_catalog
         $pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, 'CATALOGUE PRODUITS', 0, 'L');
 
 		$pdf->SetFont(pdf_getPDFFont($outputlangs), '', 14);
-		$pdf->SetTextColor(20, 20, 20);
+		$pdf->SetTextColor(50, 50, 50);
 		$title = dol_print_date(dol_mktime(0, 0, 0, $this->month, $this->day, $this->year), "daytext", false, $outputlangs, true);
 
-		$pdf->SetY(237);
+		$pdf->SetY(240);
 		$pdf->SetX(110);
 		$pdf->SetCellPaddings(10, 15, 0, 15);
 		$pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, $title, 0, 'L');
 
-		$pdf->SetY(250);
+		$pdf->SetY(247);
 		$pdf->SetX(110);
 		$pdf->SetCellPaddings(10, 15, 0, 15);
 		$pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, 'Prix public', 0, 'L');
