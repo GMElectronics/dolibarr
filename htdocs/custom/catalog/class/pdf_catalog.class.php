@@ -135,7 +135,7 @@ class pdf_catalog
         $sql .= ", p.weight, p.weight_units, p.length, p.length_units";
         $sql .= ", p.surface, p.surface_units, volume, p.volume_units";
         $sql .= ", p.label, p.description, p.fk_country, p.stock";
-		$sql .= ", c.fk_categorie";
+		$sql .= ", c.fk_categorie, categorie.description";
         $sql .= " FROM  " . MAIN_DB_PREFIX . "product as p";
         $sql .= " LEFT JOIN " . MAIN_DB_PREFIX . "categorie_product as c on c.fk_product = p.rowid ";
 		$sql .= " LEFT JOIN " . MAIN_DB_PREFIX . "categorie as categorie on categorie.rowid = c.fk_categorie";
@@ -302,6 +302,8 @@ class pdf_catalog
                 if($conf->global->CAT_SHOW_BARCODE){
                     $lines[$i][27] = $objp->barcode;
                 }
+
+				$lines[$i][28] = $objp->description;
 
                 $i++;
             }
@@ -567,9 +569,14 @@ class pdf_catalog
 					$pdf->Image($logo, $absx, 40, 0, $heightlogo);
 				}
 
-				$pdf->SetY(43);
+				$pdf->SetY(35);
 				$pdf->SetX($this->marge_gauche);
 				$pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, $cat_label, 0, 'L');
+
+				$pdf->SetY(43);
+				$pdf->SetX($this->marge_gauche);
+				$pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, $lines[$j][28], 0, 'L');
+
 
 				$this->myfoot($pdf, $page, $outputlangs, $footer);
 				$this->_pagehead($pdf, $page);
