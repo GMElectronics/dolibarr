@@ -438,7 +438,7 @@ class pdf_catalog
     {
         if ($page > 1) // Si on est pas sur la première page
         {
-            $pdf->SetY(260);
+            $pdf->SetY(270);
             $pdf->SetFont(pdf_getPDFFont($outputlangs), 'I', 8);
 			$pdf->SetMargins(0, 0, 0);
 			$pdf->SetAutoPageBreak(false, 0);
@@ -612,7 +612,6 @@ class pdf_catalog
 
 			$ref = $lines[$j][1];
 			$label = $lines[$j][20];
-            $nameproduit = $ref . " - " . $label;
 
             $image = dol_buildpath('/public/theme/common/nophoto.png', 0);
             if ($lines[$j][0]) {
@@ -631,12 +630,17 @@ class pdf_catalog
             	$maxwidth = 35;
             }
 
-			$pdf->SetFont(pdf_getPDFFont($outputlangs), '', 9);
-			if($i % 2 == 0){$pdf->SetFillColor(212, 212, 212);}else{$pdf->SetFillColor(255, 255, 255);}
-			$pdf->Cell($this->page_largeur - $this->marge_gauche - $this->marge_droite, 2, $nameproduit, 0, 0, 'L', 1);
-			$pdf->SetY($y_axe + $interligne + 6);
-			$pdf->Cell($this->page_largeur - $this->marge_gauche - $this->marge_droite, 2, $price, 0, 0, 'R', 0);
+			$pdf->SetFont(pdf_getPDFFont($outputlangs), 'B', 9);
+			if($i % 2 == 0){$pdf->SetFillColor(246, 246, 246);}else{$pdf->SetFillColor(255, 255, 255);}
+			$pdf->Cell($this->page_largeur - $this->marge_gauche - $this->marge_droite, 4, $label, 0, 0, 'L', 1);
 
+			$pdf->SetFont(pdf_getPDFFont($outputlangs), '', 9);
+			$pdf->SetX(20);
+			$pdf->Cell($this->page_largeur - $this->marge_gauche - $this->marge_droite, 4, $ref, 0, 0, 'L', 1);
+			$pdf->SetX(0);
+			$pdf->Cell($this->page_largeur - $this->marge_gauche - $this->marge_droite, 4, $price, 0, 0, 'R', 0);
+
+			$pdf->SetY($y_axe + $interligne + 6);
             /*include_once DOL_DOCUMENT_ROOT . '/core/lib/images.lib.php';
             $tmp = dol_getImageSize($image);
             $tmp['height'] = $tmp['height'] * 0.265;
