@@ -446,8 +446,13 @@ class pdf_catalog
 			if (empty($conf->global->MAIN_USE_FPDF)) $strpage = $outputlangs->transnoentities("Page")." ".$pdf->PageNo().'/'.$pdf->getAliasNbPages();
 			else $strpage = $outputlangs->transnoentities("Page")." ".$pdf->PageNo().'/{nb}';
 
+
+
             $pdf->SetX($this->page_largeur - $this->marge_droite - 20);
             $pdf->Cell(30, 10, $outputlangs->convToOutputCharset($strpage), 0, 1, 'C');
+
+			$pdf->SetY(280);
+			$pdf->Cell(0, 0, 'G.M.Electronics - BE0426.751.795 - www.gmelectronics.be - Avenue Vésale, 23 1300 Wavre - 010/77.90.66', 0, 1, 'C');
 
 			$pdf->SetMargins($this->marge_gauche, $this->marge_haute, $this->marge_droite);
 			$pdf->SetAutoPageBreak(true, 0);
@@ -514,7 +519,7 @@ class pdf_catalog
         $page = 2;
         $heightlogo = 40;
         $maxwidthlogo = 120;
-		$max = 40;             				// Max nb or record per page
+		$max = 30;             				// Max nb or record per page
 		$height = 20;
 		$maxwidth = 30;
 		if ($this->page_largeur < 210) 		// To work with US executive format
