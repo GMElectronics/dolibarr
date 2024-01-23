@@ -606,8 +606,23 @@ class pdf_catalog
                 $interligne = 0;
 
 				$pdf->AddPage();
-                $pdf->SetFont(pdf_getPDFFont($outputlangs), '', 12);
+
                 $page++;
+
+				$pdf->SetY($y_axe + $interligne + 7);
+				$pdf->SetFont(pdf_getPDFFont($outputlangs), 'B', 9);
+				$pdf->SetFillColor(246, 246, 246);
+				$pdf->Cell($this->page_largeur - $this->marge_gauche - $this->marge_droite, 7, 'Référence', 'T', 0, 'L', 1);
+				$pdf->SetX(50);
+				$pdf->Cell($this->page_largeur - $this->marge_gauche - $this->marge_droite, 7, 'Description', 0, 0, 'L', 0);
+				$pdf->SetX(5);
+				$pdf->Cell($this->page_largeur - $this->marge_gauche - $this->marge_droite, 7, 'Prix HTVA', 0, 0, 'R', 0);
+				$pdf->SetX(0);
+				$pdf->SetY($y_axe + $interligne + 7);
+
+				$interligne = $interligne + 7;
+
+				$pdf->SetFont(pdf_getPDFFont($outputlangs), '', 12);
             }
 
             if ($i == 0) {
