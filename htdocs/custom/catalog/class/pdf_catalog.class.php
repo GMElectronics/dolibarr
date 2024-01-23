@@ -438,8 +438,8 @@ class pdf_catalog
     {
         if ($page > 1) // Si on est pas sur la première page
         {
-            $pdf->SetY(270);
-            $pdf->SetFont(pdf_getPDFFont($outputlangs), 'I', 8);
+            $pdf->SetY(280);
+            $pdf->SetFont(pdf_getPDFFont($outputlangs), '', 8);
 			$pdf->SetMargins(0, 0, 0);
 			$pdf->SetAutoPageBreak(false, 0);
 
