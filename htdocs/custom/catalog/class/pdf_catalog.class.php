@@ -320,8 +320,8 @@ class pdf_catalog
         if ($pdf_input !== null && $position == 0) $this->add_pdf($pdf, $pdf_input);
 
         $pdf->AddFont('helvetica', '', 'helvetica.php'); // On ajoute la police helvetica
-        $pdf->AddPage();      // On ajoute une page. La première
-        $pdf->SetFont(pdf_getPDFFont($outputlangs), '', 18);
+        $pdf->AddPage();
+        $pdf->SetFont(pdf_getPDFFont($outputlangs), '', 16);
 
 		$pdf->SetMargins($this->marge_gauche, $this->marge_haute, $this->marge_droite);   // Left, Top, Right
 		$pdf->setPageOrientation('', 1, $this->marge_basse + 8 + 12);	// The only function to edit the bottom margin of current page to set it.
@@ -333,15 +333,15 @@ class pdf_catalog
 
 		$pdf->SetTextColor(177, 220, 97);
         $pdf->SetY(230);
-        $pdf->SetX(100);
+        $pdf->SetX(110);
+		$sd = $pdf->getCellPaddings();
         $pdf->SetCellPaddings(10, 15, 0, 15);
         $pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, $title, 0, 'L');
 
 		$title = dol_print_date(dol_mktime(0, 0, 0, $this->month, $this->day, $this->year), "daytext", false, $outputlangs, true);
 
 		$pdf->SetY(240);
-		$pdf->SetX(100);
-		$sd = $pdf->getCellPaddings();
+		$pdf->SetX(110);
 		$pdf->SetCellPaddings(10, 15, 0, 15);
 		$pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, $title, 0, 'L');
 
