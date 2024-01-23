@@ -394,7 +394,7 @@ class pdf_catalog
 				$height = 740;
 				$width = 500;
 				include_once DOL_DOCUMENT_ROOT . '/core/lib/images.lib.php';
-				$pdf->Image($cover, 0, 0, $width, $height);
+				$pdf->Image($cover, 0, 0, 0, 0);
 			}
 		}
 		else
