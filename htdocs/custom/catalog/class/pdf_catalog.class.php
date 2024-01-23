@@ -345,6 +345,11 @@ class pdf_catalog
 		$pdf->SetCellPaddings(10, 15, 0, 15);
 		$pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, $title, 0, 'L');
 
+		$pdf->SetY(250);
+		$pdf->SetX(110);
+		$pdf->SetCellPaddings(10, 15, 0, 15);
+		$pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, 'Prix public', 0, 'L');
+
 		$pdf->SetCellPaddings($sd['L'], $sd['T'], $sd['R'], $sd['B']);
 
 		$pdf->SetTextColor(20, 20, 20);
@@ -443,14 +448,12 @@ class pdf_catalog
 			$pdf->SetMargins(0, 0, 0);
 			$pdf->SetAutoPageBreak(false, 0);
 
-			if (empty($conf->global->MAIN_USE_FPDF)) $strpage = $outputlangs->transnoentities("Page")." ".$pdf->PageNo().'/'.$pdf->getAliasNbPages();
-			else $strpage = $outputlangs->transnoentities("Page")." ".$pdf->PageNo().'/{nb}';
-
-
+			$strpage = $outputlangs->transnoentities("Page")." ".$pdf->PageNo().'/'.$pdf->getAliasNbPages();
 
             $pdf->SetX($this->page_largeur - $this->marge_droite - 20);
             $pdf->Cell(30, 0, $outputlangs->convToOutputCharset($strpage), 0, 1, 'C');
 
+			$pdf->SetTextColor(20, 20, 20);
 			$pdf->SetY(280);
 			$pdf->Cell(0, 0, 'G.M.Electronics - BE0426.751.795 - www.gmelectronics.be - Avenue Vésale, 23 1300 Wavre - 010/77.90.66', 0, 1, 'C');
 
@@ -570,13 +573,24 @@ class pdf_catalog
 				$pdf->SetX($this->marge_gauche);
 				$pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, $cat_label, 0, 'L');
 
-				$pdf->SetFont(pdf_getPDFFont($outputlangs), 'B', 11);
 				$this->myfoot($pdf, $page, $outputlangs, $footer);
 				$this->_pagehead($pdf, $page);
 
 				$i = 0;
 				$y_axe = $headerheight;
 				$interligne = 0;
+
+				$pdf->SetFont(pdf_getPDFFont($outputlangs), 'B', 9);
+				$pdf->SetFillColor(246, 246, 246);
+				$pdf->Cell($this->page_largeur - $this->marge_gauche - $this->marge_droite, 7, 'Référence', 'T', 0, 'L', 1);
+				$pdf->SetX(50);
+				$pdf->Cell($this->page_largeur - $this->marge_gauche - $this->marge_droite, 7, 'Description', 0, 0, 'L', 0);
+				$pdf->SetX(5);
+				$pdf->Cell($this->page_largeur - $this->marge_gauche - $this->marge_droite, 7, 'Prix HTVA', 0, 0, 'R', 0);
+				$pdf->SetX(0);
+				$pdf->SetY($y_axe + $interligne + 7);
+
+				$interligne = $interligne + 7;
 
 				$this->_pagefoot($pdf, $page, $outputlangs);
 
@@ -635,11 +649,10 @@ class pdf_catalog
             	$maxwidth = 35;
             }
 
-			$line = ($i == 0) ? 'T' : '';
 			$label = (strlen($label) > 50) ? substr($label, 0, 50).'...' : $label;
 			$pdf->SetFont(pdf_getPDFFont($outputlangs), '', 9);
-			if($i % 2 == 0){$pdf->SetFillColor(246, 246, 246);}else{$pdf->SetFillColor(255, 255, 255);}
-			$pdf->Cell($this->page_largeur - $this->marge_gauche - $this->marge_droite, 7, $ref, $line, 0, 'L', 1);
+			if($i % 2 == 1){$pdf->SetFillColor(246, 246, 246);}else{$pdf->SetFillColor(255, 255, 255);}
+			$pdf->Cell($this->page_largeur - $this->marge_gauche - $this->marge_droite, 7, $ref, 0, 0, 'L', 1);
 			$pdf->SetX(50);
 			$pdf->Cell($this->page_largeur - $this->marge_gauche - $this->marge_droite, 7, $label, 0, 0, 'L', 0);
 			$pdf->SetX(5);
