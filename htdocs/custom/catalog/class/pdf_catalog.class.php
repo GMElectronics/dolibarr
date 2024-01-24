@@ -436,7 +436,7 @@ class pdf_catalog
 
 			if (is_readable($cover))
 			{
-				$height = 290;
+				$height = 297;
 				$width = 210;
 				include_once DOL_DOCUMENT_ROOT . '/core/lib/images.lib.php';
 				$pdf->SetMargins(0, 0, 0);
@@ -451,7 +451,7 @@ class pdf_catalog
 
 			if (is_readable($cover))
 			{
-				$height = 300;
+				$height = 297;
 				$width = 210;
 				include_once DOL_DOCUMENT_ROOT . '/core/lib/images.lib.php';
 				$pdf->SetMargins(0, 0, 0);
