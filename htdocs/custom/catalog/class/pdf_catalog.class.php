@@ -387,13 +387,13 @@ class pdf_catalog
 		$pdf->SetCellPaddings($sd['L'], $sd['T'], $sd['R'], $sd['B']);
 
 		$pdf->SetTextColor(20, 20, 20);
+		$this->_pagefoot($pdf, 1, $outputlangs);
 
-        if (!$conf->global->CAT_GROUP_BY_CATEGORY)
-		{
-            $this->_pagefoot($pdf, 1, $outputlangs);
-			$pdf->AddPage();
-		}
+		$pdf->AddPage();
+		$this->_pagehead($pdf, 2);
+		$this->_pagefoot($pdf, 1, $outputlangs);
 
+		$pdf->AddPage();
         $this->Body($pdf, $lines, $outputlangs, $footer, $divise);
 
         if ($pdf_input !== null && $position == 1) {
@@ -445,6 +445,21 @@ class pdf_catalog
 				$pdf->Image($cover, 0, 0, $width, $height);
 			}
 		}
+		else if ($page == 2)
+		{
+			$cover = $conf->mycompany->dir_output . '/cover/Cover_activities.jpg';
+			$pdf->setXY(0, 0);
+
+			if (is_readable($cover))
+			{
+				$height = 290;
+				$width = 210;
+				include_once DOL_DOCUMENT_ROOT . '/core/lib/images.lib.php';
+				$pdf->SetMargins(0, 0, 0);
+				$pdf->SetAutoPageBreak(false, 0);
+				$pdf->Image($cover, 0, 0, $width, $height);
+			}
+		}
 		else
 		{
 			$logo = $conf->mycompany->dir_output . '/logos/' . $mysoc->logo;
@@ -475,7 +490,7 @@ class pdf_catalog
      */
     public function _pagefoot(&$pdf, $page, $outputlangs)
     {
-        if ($page > 1) // Si on est pas sur la première page
+        if ($page > 2)
         {
             $pdf->SetY(280);
             $pdf->SetFont(pdf_getPDFFont($outputlangs), '', 8);
@@ -497,7 +512,7 @@ class pdf_catalog
 
     public function myfoot(&$pdf, $page, $outputlangs, $footer)
     {
-        if ($page > 1) // Si on est pas sur la première page
+        if ($page > 2)
         {
             if ($footer)
 			{
@@ -552,7 +567,7 @@ class pdf_catalog
         $x_axe = $this->marge_gauche;       // Position en X par défaut
         $interligne = 0;      				// Interligne entre chaque produit. Initialisée à 0
         $i = 0;               				// Variable pour boucle
-        $page = 2;
+        $page = 3;
         $heightlogo = 40;
         $maxwidthlogo = 120;
 		$max = 30;             				// Max nb or record per page
@@ -736,7 +751,7 @@ class pdf_catalog
             	$maxwidth = 35;
             }
 
-			$label = (strlen($label) > 50) ? substr($label, 0, 50).'...' : $label;
+			$label = (strlen($label) > 50) ? substr($label, 0, 75).'...' : $label;
 			$pdf->SetFont(pdf_getPDFFont($outputlangs), '', 9);
 			if($i % 2 == 1){$pdf->SetFillColor(246, 246, 246);}else{$pdf->SetFillColor(255, 255, 255);}
 			$pdf->Cell($this->page_largeur - $this->marge_gauche - $this->marge_droite, 7, $ref, 0, 0, 'L', 1);
