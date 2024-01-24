@@ -606,6 +606,12 @@ class pdf_catalog
 					$pdf->SetFillColor(255, 255, 255);
 					$message = '* Les prix sont indiqués en euros, hors TVA et à l\'unité. Des remises peuvent être appliquées en fonction des quantités. Les prix peuvent être modifiés sans préavis.';
 					$pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, $message, 0, 'L');
+
+					$pdf->SetY($y_axe + $interligne + 15);
+					$pdf->SetFont(pdf_getPDFFont($outputlangs), 'I', 7);
+					$pdf->SetFillColor(255, 255, 255);
+					$message = '** Si vous ne trouvez pas ce que vous cherchez, nous nous ferons un plaisir de vous aider via l\'email sales@gmelectronics.be';
+					$pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, $message, 0, 'L');
 				}
 			}
 
