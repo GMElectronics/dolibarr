@@ -384,7 +384,7 @@ class pdf_catalog
 	{
 		global $conf;
 
-		$cover = $conf->mycompany->dir_output . '/cover/Cover.jpg';
+		$cover = $conf->mycompany->dir_output . '/cover/Cover_gmelectronics.jpg';
 		$pdf->setXY(0, 0);
 
 		if (is_readable($cover))
