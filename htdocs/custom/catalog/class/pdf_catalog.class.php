@@ -673,13 +673,17 @@ class pdf_catalog
 					$pdf->SetY(43);
 					$pdf->SetX($this->marge_gauche);
 					$pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, $description, 0, 'L');
+					$y_axe = $headerheight + 3;
+				}
+				else
+				{
+					$y_axe = $headerheight - 3;
 				}
 
 				$this->myfoot($pdf, $page, $outputlangs, $footer);
 				$this->_pagehead($pdf);
 
 				$i = 0;
-				$y_axe = $headerheight + 3;
 				$interligne = 0;
 
 				$pdf->SetY($y_axe + $interligne + 7);
