@@ -393,7 +393,6 @@ class pdf_catalog
 		$this->_pagehead($pdf, 2);
 		$this->_pagefoot($pdf, 1, $outputlangs);
 
-		$pdf->AddPage();
         $this->Body($pdf, $lines, $outputlangs, $footer, $divise);
 
         if ($pdf_input !== null && $position == 1) {
@@ -452,7 +451,7 @@ class pdf_catalog
 
 			if (is_readable($cover))
 			{
-				$height = 290;
+				$height = 300;
 				$width = 210;
 				include_once DOL_DOCUMENT_ROOT . '/core/lib/images.lib.php';
 				$pdf->SetMargins(0, 0, 0);
