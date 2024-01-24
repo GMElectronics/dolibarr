@@ -677,7 +677,7 @@ class pdf_catalog
 				}
 				else
 				{
-					$y_axe = $headerheight - 7;
+					$y_axe = $headerheight - 8;
 				}
 
 				$this->myfoot($pdf, $page, $outputlangs, $footer);
