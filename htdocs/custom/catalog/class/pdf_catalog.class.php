@@ -416,7 +416,7 @@ class pdf_catalog
 		$pdf->SetY(246);
 		$pdf->SetX(110);
 		$pdf->SetCellPaddings(10, 15, 0, 15);
-		$pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, 'Prix public', 0, 'L');
+		$pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, 'Prix public unitaire', 0, 'L');
 	}
 
 	private function createEndPage(&$pdf)
@@ -630,6 +630,14 @@ class pdf_catalog
 
 			if ($cat_label != $cat[$lines[$j][23]]->label)
 			{
+				if($cat_label !== null)
+				{
+					$pdf->SetY($y_axe + $interligne + 7);
+					$pdf->SetFont(pdf_getPDFFont($outputlangs), 'I', 7);
+					$pdf->SetFillColor(255, 255, 255);
+					$pdf->Cell($this->page_largeur - $this->marge_gauche - $this->marge_droite, 7, 'Les prix sont indiqués en euros et hors TVA. Sauf indication contraire, le prix indiqué n\'est qu\'une estimation à titre indicatif. Les prix peuvent être modifiés sans préavis.', 'T', 0, 'L', 1);
+				}
+
 				$pdf->AddPage();
 				$pdf->SetFont(pdf_getPDFFont($outputlangs), '', 15);
 				$cat_label = $cat[$lines[$j][23]]->label;
