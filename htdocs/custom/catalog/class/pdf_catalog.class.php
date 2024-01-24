@@ -352,8 +352,6 @@ class pdf_catalog
             $pdf->setPrintFooter(false);
         }
 
-        if ($pdf_input !== null && $position == 0) $this->add_pdf($pdf, $pdf_input);
-
 		// Default configuration
         $pdf->AddFont('helvetica', '', 'helvetica.php');
 		$pdf->SetFont(pdf_getPDFFont($outputlangs), '', 16);
@@ -365,25 +363,19 @@ class pdf_catalog
 		$sd = $pdf->getCellPaddings();
 		$this->createCover($pdf, $outputlangs);
 
-		// Put the global configuration to create the rest
+		// Put the global configuration to create the main content
 		$pdf->SetCellPaddings($sd['L'], $sd['T'], $sd['R'], $sd['B']);
 		$pdf->SetTextColor(20, 20, 20);
-		$this->_pagefoot($pdf, 1, $outputlangs);
 
+		// Create the main content
         $this->Body($pdf, $lines, $outputlangs, $footer, $divise);
 
 		// Create end page with activities of GME
 		$pdf->AddPage();
 		$this->createEndPage($pdf);
 
-        if ($pdf_input !== null && $position == 1) {
-            $this->add_pdf($pdf, $pdf_input);
-        }
-
         $pdf->Close();
         $pdf->Output($file, 'F');
-        if (!empty($conf->global->MAIN_UMASK))
-            @chmod($file, octdec($conf->global->MAIN_UMASK));
 
         return 1;
     }
