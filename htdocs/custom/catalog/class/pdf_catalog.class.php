@@ -635,7 +635,8 @@ class pdf_catalog
 					$pdf->SetY($y_axe + $interligne + 7);
 					$pdf->SetFont(pdf_getPDFFont($outputlangs), 'I', 7);
 					$pdf->SetFillColor(255, 255, 255);
-					$pdf->Cell($this->page_largeur - $this->marge_gauche - $this->marge_droite, 7, 'Les prix sont indiqués en euros et hors TVA. Sauf indication contraire, le prix indiqué n\'est qu\'une estimation à titre indicatif. Les prix peuvent être modifiés sans préavis.', 'T', 0, 'L', 1);
+					$message = 'Les prix sont indiqués en euros et hors TVA. Sauf indication contraire, le prix indiqué n\'est qu\'une estimation à titre indicatif. Les prix peuvent être modifiés sans préavis.';
+					$pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, $message, 0, 'L');
 				}
 
 				$pdf->AddPage();
