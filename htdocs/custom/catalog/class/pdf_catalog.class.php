@@ -618,7 +618,7 @@ class pdf_catalog
 
 				if (is_readable($catPicture))
 				{
-					$height = 300;
+					$height = 297;
 					$width = 210;
 					include_once DOL_DOCUMENT_ROOT . '/core/lib/images.lib.php';
 					$pdf->SetMargins(0, 0, 0);
@@ -665,10 +665,15 @@ class pdf_catalog
 				$pdf->SetX($this->marge_gauche);
 				$pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, $cat_label, 0, 'L');
 
-				$pdf->SetFont(pdf_getPDFFont($outputlangs), '', 9);
-				$pdf->SetY(43);
-				$pdf->SetX($this->marge_gauche);
-				$pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, $lines[$j][28], 0, 'L');
+				$description = $lines[$j][28];
+
+				if($description !== '')
+				{
+					$pdf->SetFont(pdf_getPDFFont($outputlangs), '', 9);
+					$pdf->SetY(43);
+					$pdf->SetX($this->marge_gauche);
+					$pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, $description, 0, 'L');
+				}
 
 				$this->myfoot($pdf, $page, $outputlangs, $footer);
 				$this->_pagehead($pdf);
