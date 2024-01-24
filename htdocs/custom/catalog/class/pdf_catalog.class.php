@@ -632,10 +632,10 @@ class pdf_catalog
 			{
 				if($cat_label !== null)
 				{
-					$pdf->SetY($y_axe + $interligne + 7);
+					$pdf->SetY($y_axe + $interligne + 10);
 					$pdf->SetFont(pdf_getPDFFont($outputlangs), 'I', 7);
 					$pdf->SetFillColor(255, 255, 255);
-					$message = 'Les prix sont indiqués en euros et hors TVA. Sauf indication contraire, le prix indiqué n\'est qu\'une estimation à titre indicatif. Les prix peuvent être modifiés sans préavis.';
+					$message = '* Les prix sont indiqués en euros, hors TVA et à l\'unité. Des remises peuvent être appliquées en fonction des quantités. Les prix peuvent être modifiés sans préavis.';
 					$pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, $message, 0, 'L');
 				}
 
