@@ -435,6 +435,8 @@ class pdf_catalog
 			$pdf->SetAutoPageBreak(false, 0);
 			$pdf->Image($cover, 0, 0, $width, $height);
 		}
+
+		$this->_pagehead($pdf);
 	}
 
     public function add_pdf(&$pdf, &$pdf_input)
@@ -456,7 +458,7 @@ class pdf_catalog
      * @param      $pdf            Object PDF
      * @param $page
      */
-    public function _pagehead(&$pdf, $page)
+    public function _pagehead(&$pdf)
     {
         global $conf, $mysoc;
 
@@ -657,7 +659,7 @@ class pdf_catalog
 				$pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, $lines[$j][28], 0, 'L');
 
 				$this->myfoot($pdf, $page, $outputlangs, $footer);
-				$this->_pagehead($pdf, $page);
+				$this->_pagehead($pdf);
 
 				$i = 0;
 				$y_axe = $headerheight + 3;
@@ -712,7 +714,7 @@ class pdf_catalog
                 // Output the header and footers before writing first record of page
                 $this->_pagefoot($pdf, $page, $outputlangs);
                 $this->myfoot($pdf, $page, $outputlangs, $footer);
-                $this->_pagehead($pdf, $page);
+                $this->_pagehead($pdf);
             }
 
 			/*
