@@ -354,21 +354,63 @@ class pdf_catalog
 
         if ($pdf_input !== null && $position == 0) $this->add_pdf($pdf, $pdf_input);
 
-        $pdf->AddFont('helvetica', '', 'helvetica.php'); // On ajoute la police helvetica
+		// Default configuration
+        $pdf->AddFont('helvetica', '', 'helvetica.php');
+		$pdf->SetFont(pdf_getPDFFont($outputlangs), '', 16);
+		$pdf->SetMargins($this->marge_gauche, $this->marge_haute, $this->marge_droite);
+		$pdf->setPageOrientation('', 1, $this->marge_basse + 8 + 12);
+
+		// Create cover page
         $pdf->AddPage();
-        $pdf->SetFont(pdf_getPDFFont($outputlangs), '', 16);
+		$sd = $pdf->getCellPaddings();
+		$this->createCover($pdf, $outputlangs);
 
-		$pdf->SetMargins($this->marge_gauche, $this->marge_haute, $this->marge_droite);   // Left, Top, Right
-		$pdf->setPageOrientation('', 1, $this->marge_basse + 8 + 12);	// The only function to edit the bottom margin of current page to set it.
+		// Put the global configuration to create the rest
+		$pdf->SetCellPaddings($sd['L'], $sd['T'], $sd['R'], $sd['B']);
+		$pdf->SetTextColor(20, 20, 20);
+		$this->_pagefoot($pdf, 1, $outputlangs);
 
-        $this->_pagehead($pdf, 1);
+        $this->Body($pdf, $lines, $outputlangs, $footer, $divise);
+
+		// Create end page with activities of GME
+		$pdf->AddPage();
+		$this->createEndPage($pdf);
+
+        if ($pdf_input !== null && $position == 1) {
+            $this->add_pdf($pdf, $pdf_input);
+        }
+
+        $pdf->Close();
+        $pdf->Output($file, 'F');
+        if (!empty($conf->global->MAIN_UMASK))
+            @chmod($file, octdec($conf->global->MAIN_UMASK));
+
+        return 1;
+    }
+
+	private function createCover(&$pdf, $outputlangs)
+	{
+		global $conf;
+
+		$cover = $conf->mycompany->dir_output . '/cover/Cover.jpg';
+		$pdf->setXY(0, 0);
+
+		if (is_readable($cover))
+		{
+			$height = 297;
+			$width = 210;
+			include_once DOL_DOCUMENT_ROOT . '/core/lib/images.lib.php';
+			$pdf->SetMargins(0, 0, 0);
+			$pdf->SetAutoPageBreak(false, 0);
+			$pdf->Image($cover, 0, 0, $width, $height);
+		}
 
 		$pdf->SetTextColor(146, 208, 80);
-        $pdf->SetY(230);
-        $pdf->SetX(110);
-		$sd = $pdf->getCellPaddings();
-        $pdf->SetCellPaddings(10, 15, 0, 15);
-        $pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, 'CATALOGUE PRODUITS', 0, 'L');
+		$pdf->SetY(230);
+		$pdf->SetX(110);
+
+		$pdf->SetCellPaddings(10, 15, 0, 15);
+		$pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, 'CATALOGUE PRODUITS', 0, 'L');
 
 		$pdf->SetFont(pdf_getPDFFont($outputlangs), '', 14);
 		$pdf->SetTextColor(70, 70, 70);
@@ -383,29 +425,25 @@ class pdf_catalog
 		$pdf->SetX(110);
 		$pdf->SetCellPaddings(10, 15, 0, 15);
 		$pdf->MultiCell(($this->page_largeur - $this->marge_gauche - $this->marge_droite), 0, 'Prix public', 0, 'L');
+	}
 
-		$pdf->SetCellPaddings($sd['L'], $sd['T'], $sd['R'], $sd['B']);
+	private function createEndPage(&$pdf)
+	{
+		global $conf;
 
-		$pdf->SetTextColor(20, 20, 20);
-		$this->_pagefoot($pdf, 1, $outputlangs);
+		$cover = $conf->mycompany->dir_output . '/cover/Cover_activities.jpg';
+		$pdf->setXY(0, 0);
 
-		$pdf->AddPage();
-		$this->_pagehead($pdf, 2);
-		$this->_pagefoot($pdf, 1, $outputlangs);
-
-        $this->Body($pdf, $lines, $outputlangs, $footer, $divise);
-
-        if ($pdf_input !== null && $position == 1) {
-            $this->add_pdf($pdf, $pdf_input);
-        }
-
-        $pdf->Close();
-        $pdf->Output($file, 'F');
-        if (!empty($conf->global->MAIN_UMASK))
-            @chmod($file, octdec($conf->global->MAIN_UMASK));
-
-        return 1;
-    }
+		if (is_readable($cover))
+		{
+			$height = 297;
+			$width = 210;
+			include_once DOL_DOCUMENT_ROOT . '/core/lib/images.lib.php';
+			$pdf->SetMargins(0, 0, 0);
+			$pdf->SetAutoPageBreak(false, 0);
+			$pdf->Image($cover, 0, 0, $width, $height);
+		}
+	}
 
     public function add_pdf(&$pdf, &$pdf_input)
     {
@@ -429,55 +467,23 @@ class pdf_catalog
     public function _pagehead(&$pdf, $page)
     {
         global $conf, $mysoc;
-		if ($page == 1)
+
+		$logo = $conf->mycompany->dir_output . '/logos/' . $mysoc->logo;
+		$pdf->setXY($this->marge_gauche, $this->marge_haute);
+		$pdf->SetMargins($this->marge_gauche, $this->marge_haute, $this->marge_droite);
+		$pdf->SetAutoPageBreak(true, 0);
+
+		if (is_readable($logo) && !empty($mysoc->logo))
 		{
-			$cover = $conf->mycompany->dir_output . '/cover/Cover.jpg';
-			$pdf->setXY(0, 0);
+			$height = pdf_getHeightForLogo($logo);
+			$maxheight = 15;
 
-			if (is_readable($cover))
+			if ($height > $maxheight)
 			{
-				$height = 297;
-				$width = 210;
-				include_once DOL_DOCUMENT_ROOT . '/core/lib/images.lib.php';
-				$pdf->SetMargins(0, 0, 0);
-				$pdf->SetAutoPageBreak(false, 0);
-				$pdf->Image($cover, 0, 0, $width, $height);
+				$height = $maxheight;
 			}
-		}
-		else if ($page == 2)
-		{
-			$cover = $conf->mycompany->dir_output . '/cover/Cover_activities.jpg';
-			$pdf->setXY(0, 0);
 
-			if (is_readable($cover))
-			{
-				$height = 297;
-				$width = 210;
-				include_once DOL_DOCUMENT_ROOT . '/core/lib/images.lib.php';
-				$pdf->SetMargins(0, 0, 0);
-				$pdf->SetAutoPageBreak(false, 0);
-				$pdf->Image($cover, 0, 0, $width, $height);
-			}
-		}
-		else
-		{
-			$logo = $conf->mycompany->dir_output . '/logos/' . $mysoc->logo;
-			$pdf->setXY($this->marge_gauche, $this->marge_haute);
-			$pdf->SetMargins($this->marge_gauche, $this->marge_haute, $this->marge_droite);
-			$pdf->SetAutoPageBreak(true, 0);
-
-			if (is_readable($logo) && !empty($mysoc->logo))
-			{
-				$height = pdf_getHeightForLogo($logo);
-				$maxheight = 15;
-
-				if ($height > $maxheight)
-				{
-					$height = $maxheight;
-				}
-
-				$pdf->Image($logo, 155, 12, 0, $height);
-			}
+			$pdf->Image($logo, 155, 12, 0, $height);
 		}
     }
 
