@@ -782,7 +782,7 @@ class pdf_catalog
 			if($i % 2 == 1){$pdf->SetFillColor(246, 246, 246);}else{$pdf->SetFillColor(255, 255, 255);}
 			$pdf->Cell($this->page_largeur - $this->marge_gauche - $this->marge_droite, 7, $ref, 0, 0, 'L', 1);
 			$pdf->SetX(50);
-			$pdf->Cell($this->page_largeur - $this->marge_gauche - $this->marge_droite, 7, $label, 0, 0, 'L', 0);
+			$pdf->Cell($this->page_largeur - $this->marge_gauche - $this->marge_droite, 7, ucfirst($label), 0, 0, 'L', 0);
 			$pdf->SetX(5);
 			$pdf->Cell($this->page_largeur - $this->marge_gauche - $this->marge_droite, 7, $price, 0, 0, 'R', 0);
 			$pdf->SetX(0);
