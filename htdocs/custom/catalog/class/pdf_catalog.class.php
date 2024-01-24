@@ -374,8 +374,6 @@ class pdf_catalog
 		$pdf->AddPage();
 		$this->createEndPage($pdf);
 
-		$pdf->SetCompression(true);
-
         $pdf->Close();
         $pdf->Output($file, 'F');
 
